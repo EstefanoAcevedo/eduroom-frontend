@@ -11,6 +11,4 @@ export const teacher_routes: Routes = [
     {path: 'teacher/edit-attendance', component: TeacherEditAttendance},
     {path: 'teacher/subjects', component: TeacherSubjects},
     {path: 'teacher/take-attendance', component: TeacherTakeAttendance},
-    {path: '', redirectTo: 'teacher/dashboard', pathMatch: 'full'},
-    {path: '**', redirectTo: 'teacher/dashboard', pathMatch: 'full'}
 ];

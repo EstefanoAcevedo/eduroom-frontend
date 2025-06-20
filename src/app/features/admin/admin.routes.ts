@@ -17,6 +17,4 @@ export const admin_routes: Routes = [
     {path: 'admin/generate-reports', component: AdminGenerateReports},
     {path: 'admin/take-attendance', component: AdminTakeAttendance},
     {path: 'admin/user-management', component: AdminUserManagement},
-    {path: '', redirectTo: 'admin/dashboard', pathMatch: 'full'},
-    {path: '**', redirectTo: 'admin/dashboard', pathMatch: 'full'}
 ];
