@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+/* BACKGROUND */
+.background {
+    background-color: #FBFBFE;
+    color: #150828;
+}
+
+.background-primary {
+    background-color: #150828;
+    color: #FFFFFF;
+}
+
+.background-secondary {
+    background-color: #D3C1F0;
+    color: #150828;
+}
+
+.background-accent {
+    background-color: #6D2BCD;
+    color: #FFFFFF;
+}
+
+.background-accent2 {
+    background-color: #F9DA25;
+    color: #150828;
+}
+/* END BACKGROUND */
+
+
+/* BUTTONS */
+.button-accent {
+    background-color: #6D2BCD;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.button-accent:hover {
+    background-color: #904cf7;
+}
+
+.button-accent:active {
+    background-color: #421682;
+}
+
+.button-accent2 {
+    background-color: #F9DA25;
+    color: #150828;
+    letter-spacing: 1px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.button-accent2:hover {
+    background-color: #FFEB74;
+}
+
+.button-accent2:active {
+    background-color: #B19A19;
+}
+/* BUTTONS ENDS */
