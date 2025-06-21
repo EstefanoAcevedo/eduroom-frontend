@@ -63,3 +63,17 @@
     background-color: #B19A19;
 }
 /* BUTTONS ENDS */
+
+/* BORDERS */
+.b-primary {
+    border-color: #150828 !important;
+}
+
+.b-accent {
+    border-color: #6D2BCD !important;
+}
+
+.b-accent2 {
+    border-color: #F9DA25 !important;
+}
+/* BORDERS ENDS */

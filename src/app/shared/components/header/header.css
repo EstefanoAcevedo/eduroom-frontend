@@ -1,0 +1,29 @@
+.nav-link {
+    color: #150828;
+    border: 1px transparent solid;
+    border-radius: 5px;
+    margin-left: 1px;
+    margin-right: 1px;
+    transition: none;
+}
+
+.nav-link:hover {
+    border-color: #150828;
+}
+
+.nav-link:active {
+    background-color: #150828;
+    color: #FFFFFF;
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    background-color: #150828;
+    color: #FFFFFF;
+}
+/* DROPDOWN */
+/* Modificar el estilo de los dropdowns de bootstrap */
+.dropdown-item:hover {
+    background-color: #150828;
+    color: #FFFFFF;
+}
+/* DROPDOWN ENDS */
