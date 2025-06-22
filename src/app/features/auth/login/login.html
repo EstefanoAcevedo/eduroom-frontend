@@ -3,7 +3,7 @@
 
         <!-- Columna vacía para futura imagen -->
         <div class="col-12 col-md-6 d-none d-md-block" style="background-color: #f0f0f0;">
-
+            <!-- Imagen o diseño futuro -->
         </div>
 
         <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
@@ -14,16 +14,26 @@
                     <h2 class="fw-bold">EduRoom</h2>
                 </div>
 
-                <form formGroup="loginForm" (ngSubmit)="onSubmit()">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
 
+                    <!-- Email -->
                     <div class="mb-3">
-                        <input type="email" class="form-control" formControlName="email"
-                            placeholder="Usuario (Email)" />
+                        <input type="text" class="form-control" formControlName="cuil" placeholder="Usuario (CUIL)"
+                            [class.is-invalid]="submitted && f['cuil'].invalid" />
+                        <div *ngIf="submitted && f['cuil'].errors" class="invalid-feedback">
+                            <div *ngIf="f['cuil'].errors['required']">El usuario es obligatorio.</div>
+                            <div *ngIf="f['cuil'].errors['pattern']">El CUIL no es válido.</div>
+                        </div>
                     </div>
 
+                    <!-- Contraseña -->
                     <div class="mb-3">
-                        <input type="password" class="form-control" formControlName="password"
-                            placeholder="Contraseña" />
+                        <input type="password" class="form-control" formControlName="password" placeholder="Contraseña"
+                            [class.is-invalid]="submitted && f['password'].invalid" />
+                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                            <div *ngIf="f['password'].errors['required']">La contraseña es obligatoria.</div>
+                            <div *ngIf="f['password'].errors['minlength']">Debe tener al menos 6 caracteres.</div>
+                        </div>
                     </div>
 
                     <div class="mb-3 text-end">
@@ -31,7 +41,7 @@
                             contraseña?</a>
                     </div>
 
-                    <button type="submit" class="background-accent rounded-2 w-100" [disabled]="loginForm.invalid">
+                    <button type="submit" class="button-accent rounded-2 w-100">
                         Iniciar Sesión
                     </button>
 
@@ -40,6 +50,7 @@
                     </div>
 
                 </form>
+
             </div>
         </div>
 
