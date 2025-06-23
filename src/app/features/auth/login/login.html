@@ -10,18 +10,19 @@
             <div class="card p-4 shadow-sm w-100" style="max-width: 400px; border-radius: 1rem;">
 
                 <div class="text-center mb-4">
-                    <img src="EduRoom_logo.png" height="300" width="300" alt="Logo EduRoom">
+                    <img src="EduRoom_logo.png" height="300" width="300" alt="Logo EduRoom" />
                 </div>
 
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
 
-                    <!-- Email -->
+                    <!-- CUIL -->
                     <div class="mb-3">
                         <input type="text" class="form-control" formControlName="cuil" placeholder="Usuario (CUIL)"
                             [class.is-invalid]="submitted && f['cuil'].invalid" />
                         <div *ngIf="submitted && f['cuil'].errors" class="invalid-feedback">
                             <div *ngIf="f['cuil'].errors['required']">El usuario es obligatorio.</div>
-                            <div *ngIf="f['cuil'].errors['pattern']">El CUIL no es válido.</div>
+                            <div *ngIf="f['cuil'].errors['pattern']">Debe ser un CUIL válido (11 dígitos sin guiones).
+                            </div>
                         </div>
                     </div>
 
@@ -36,7 +37,7 @@
                     </div>
 
                     <div class="mb-3 text-end">
-                        <a href="/auth/password-recovery" class="small text-decoration-none">¿Olvidaste tu
+                        <a [routerLink]="['/auth/password-recovery']" class="small text-decoration-none">¿Olvidaste tu
                             contraseña?</a>
                     </div>
 
@@ -45,7 +46,8 @@
                     </button>
 
                     <div class="text-center mt-3">
-                        <a href="/auth/register" class="small text-decoration-none">¿No tienes cuenta? Regístrate</a>
+                        <a [routerLink]="['/auth/register']" class="small text-decoration-none">¿No tienes cuenta?
+                            Regístrate</a>
                     </div>
 
                 </form>
