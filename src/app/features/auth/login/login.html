@@ -1,8 +1,8 @@
-<div class="container vh-100 d-flex align-items-center justify-content-center">
+<div class="container-fluid p-3 p-sm-5 background-secondary">
     <div class="row w-100">
 
         <!-- Columna vacía para futura imagen -->
-        <div class="col-12 col-md-6 d-none d-md-block" style="background-color: #f0f0f0;">
+        <div class="container background rounded-4 col-12 col-md-6 d-none d-md-block background-color">
             <!-- Imagen o diseño futuro -->
         </div>
 
@@ -10,8 +10,7 @@
             <div class="card p-4 shadow-sm w-100" style="max-width: 400px; border-radius: 1rem;">
 
                 <div class="text-center mb-4">
-                    <div class="bg-primary rounded-circle mx-auto mb-2" style="width: 50px; height: 50px;"></div>
-                    <h2 class="fw-bold">EduRoom</h2>
+                    <img src="EduRoom_logo.png" height="300" width="300" alt="Logo EduRoom">
                 </div>
 
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
