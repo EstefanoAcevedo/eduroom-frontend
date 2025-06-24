@@ -7,54 +7,143 @@
                 </div>
             </div>
             <div class="row p-3 pt-5 pb-5 p-lg-5">
-                <form>
+                <form [formGroup]="registerForm">
                     <div class="row g-3">
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="text" placeholder="Apellido">
+                            <input class="form-control" type="text" placeholder="Apellido" formControlName="lastname">
+                            @if (lastname.invalid && (lastname.dirty || lastname.touched)) {
+                                @if (lastname.hasError("required")) {
+                                    <p class="text-danger">Introduzca un apellido</p>
+                                }
+                                @if (lastname.hasError("maxlength")) {
+                                    <p class="text-danger">Demasiado largo</p>
+                                }
+                                @if (lastname.hasError("pattern")) {
+                                    <p class="text-danger">Apellido inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="text" placeholder="Nombre">
+                            <input class="form-control" type="text" placeholder="Nombre" formControlName="name">
+                            @if (name.invalid && (name.dirty || name.touched)) {
+                                @if (name.hasError("required")) {
+                                    <p class="text-danger">Introduzca un nombre</p>
+                                }
+                                @if (name.hasError("maxLength")) {
+                                    <p class="text-danger">Demasiado largo</p>
+                                }
+                                @if (name.hasError("pattern")) {
+                                    <p class="text-danger">Nombre inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="text" placeholder="CUIL">
+                            <input class="form-control" type="text" placeholder="CUIL" formControlName="cuil">
+                            @if (cuil.invalid && (cuil.dirty || cuil.touched)) {
+                                @if (cuil.hasError("required")) {
+                                    <p class="text-danger">Introduzca un CUIL</p>
+                                }
+                                @if (cuil.hasError("minlength") || cuil.hasError("maxlength") || cuil.hasError("pattern")) {
+                                    <p class="text-danger">CUIL inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="text" placeholder="Teléfono">
+                            <input class="form-control" type="tel" placeholder="Teléfono" formControlName="tel">
+                            @if (tel.invalid && (tel.dirty || tel.touched)) {
+                                @if (tel.hasError("required")) {
+                                    <p class="text-danger">Introduzca un número de teléfono</p>
+                                }
+                                @if (tel.hasError("pattern")) {
+                                    <p class="text-danger">Número de teléfono inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <select class="form-select">
-                                <option>Localidades</option>
+                            <select class="form-select" formControlName="location">
+                                <option selected>Localidades</option>
                                 <!-- Opciones -->
                             </select>
+                            @if (location.invalid && (location.dirty || location.touched)) {
+                                @if (location.hasError("required")) {
+                                    <p class="text-danger">Seleccione una localidad</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="text" placeholder="Domicilio">
+                            <input class="form-control" type="text" placeholder="Domicilio" formControlName="address">
+                            @if (address.invalid && (address.dirty || address.touched)) {
+                                @if (address.hasError("required")) {
+                                    <p class="text-danger">Introduzca un domicilio</p>
+                                }
+                                @if (address.hasError("maxlength")) {
+                                    <p class="text-danger">Demasiado largo</p>
+                                }
+                                @if (address.hasError("pattern")) {
+                                    <p class="text-danger">Domicilio inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="email" placeholder="Correo electrónico">
+                            <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email">
+                            @if (email.invalid && (email.dirty || email.touched)) {
+                                @if (email.hasError("required")) {
+                                    <p class="text-danger">Introduzca un correo electrónico</p>
+                                }
+                                @if (email.hasError("maxlength")) {
+                                    <p class="text-danger">Demasiado largo</p>
+                                }
+                                @if (email.hasError("pattern")) {
+                                    <p class="text-danger">Correo electrónico inválido</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <select class="form-select">
-                                <option>Rol</option>
+                            <select class="form-select" formControlName="rol">
+                                <option selected>Rol</option>
                                 <!-- Opciones -->
                             </select>
+                            @if (rol.invalid && (rol.dirty || rol.touched)) {
+                                @if (rol.hasError("required")) {
+                                    <p class="text-danger">Seleccione un rol</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="password" placeholder="Contraseña">
+                            <input class="form-control" type="password" placeholder="Contraseña" formControlName="password">
+                            @if (password.invalid && (password.dirty || password.touched)) {
+                                @if (password.hasError("required")) {
+                                    <p class="text-danger">Introduzca una contraseña</p>
+                                }
+                                @if (password.hasError("maxlength")) {
+                                    <p class="text-danger">Contraseña demasiado larga</p>
+                                }
+                            }
                         </div>
                         <div class="col-12 col-md-6">
-                            <input class="form-control" type="password" placeholder="Repetir contraseña">
+                            <input class="form-control" type="password" placeholder="Repetir contraseña" formControlName="matchPassword">
+                            @if (matchPassword.invalid && (matchPassword.dirty || matchPassword.touched)) {
+                                @if (matchPassword.hasError("required")) {
+                                    <p class="text-danger">Vuelva a introducir la contraseña</p>
+                                }
+                                @if (matchPassword.hasError("maxlength")) {
+                                    <p class="text-danger">Contraseña demasiado larga</p>
+                                }
+                                @if (matchPassword.hasError("passwordMismatch")) {
+                                    <p class="text-danger">La contraseña no coincide</p>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row pt-5 text-center">
+                        <div class="col-12">
+                            <button class="button-accent ps-5 pe-5" (click)="registerUser()">Registrarse</button>
+                        </div>
+                        <div class="col-12">
+                            <p class="pt-4"><a class="pt-4" routerLink="/auth/login">¿Ya tienes una cuenta? Inicia Sesión</a></p>
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="row pb-5 text-center">
-                <div class="col-12">
-                    <button class="button-accent ps-5 pe-5">Registrarse</button>
-                </div>
-                <div class="col-12">
-                    <p class="pt-4"><a class="pt-4" routerLink="/auth/login">¿Ya tienes una cuenta? Inicia Sesión</a></p>
-                </div>
             </div>
         </div>
     </div>
