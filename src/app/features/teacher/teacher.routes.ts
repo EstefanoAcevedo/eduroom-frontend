@@ -6,9 +6,11 @@ import { TeacherSubjects } from './teacher-subjects/teacher-subjects';
 import { TeacherTakeAttendance } from './teacher-take-attendance/teacher-take-attendance';
 
 export const teacher_routes: Routes = [
-    {path: 'teacher/attendance-list', component: TeacherAttendanceList},
-    {path: 'teacher/dashboard', component: TeacherDashboard},
-    {path: 'teacher/edit-attendance', component: TeacherEditAttendance},
-    {path: 'teacher/subjects', component: TeacherSubjects},
-    {path: 'teacher/take-attendance', component: TeacherTakeAttendance},
+    { path: 'attendance-list', component: TeacherAttendanceList },
+    { path: 'dashboard', component: TeacherDashboard },
+    { path: 'edit-attendance', component: TeacherEditAttendance },
+    { path: 'subjects', component: TeacherSubjects },
+    { path: 'take-attendance', component: TeacherTakeAttendance },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];

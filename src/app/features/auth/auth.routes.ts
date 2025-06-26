@@ -4,7 +4,9 @@ import { PasswordRecovery } from './password-recovery/password-recovery';
 import { Register } from './register/register';
 
 export const auth_routes: Routes = [
-    {path: 'auth/login', component: Login},
-    {path: 'auth/password-recovery', component: PasswordRecovery},
-    {path: 'auth/register', component: Register},
+    { path: 'login', component: Login },
+    { path: 'password-recovery', component: PasswordRecovery },
+    { path: 'register', component: Register },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

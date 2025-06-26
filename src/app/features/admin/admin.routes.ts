@@ -9,12 +9,14 @@ import { AdminTakeAttendance } from './admin-take-attendance/admin-take-attendan
 import { AdminUserManagement } from './admin-user-management/admin-user-management';
 
 export const admin_routes: Routes = [
-    {path: 'admin/attendance-overview', component: AdminAttendanceOverview},
-    {path: 'admin/dashboard', component: AdminDashboard},
-    {path: 'admin/edit-attendance', component: AdminEditAttendance},
-    {path: 'admin/justify-absence', component: AdminJustifyAbsence},
-    {path: 'admin/absence-reports', component: AdminAbsenceReports},
-    {path: 'admin/generate-reports', component: AdminGenerateReports},
-    {path: 'admin/take-attendance', component: AdminTakeAttendance},
-    {path: 'admin/user-management', component: AdminUserManagement},
+    { path: 'attendance-overview', component: AdminAttendanceOverview },
+    { path: 'dashboard', component: AdminDashboard },
+    { path: 'edit-attendance', component: AdminEditAttendance },
+    { path: 'justify-absence', component: AdminJustifyAbsence },
+    { path: 'absence-reports', component: AdminAbsenceReports }, 
+    { path: 'generate-reports', component: AdminGenerateReports },
+    { path: 'take-attendance', component: AdminTakeAttendance },
+    { path: 'user-management', component: AdminUserManagement },
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];

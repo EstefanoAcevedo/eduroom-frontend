@@ -12,8 +12,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(app_routes),
-    provideRouter(admin_routes),
     provideRouter(auth_routes),
+    provideRouter(admin_routes),
     provideRouter(student_routes),
     provideRouter(teacher_routes),
   ]
