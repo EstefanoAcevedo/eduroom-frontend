@@ -77,3 +77,33 @@
     border-color: #F9DA25 !important;
 }
 /* BORDERS ENDS */
+
+/* A */
+.a-accent {
+    color: #150828;
+    text-decoration: none;
+}
+
+.a-accent:hover {
+    color: #6D2BCD;
+    text-decoration: underline;
+}
+/* A ENDS */
+
+/* ANGULAR STYLES */
+.ng-valid:not(form).ng-touched {
+    border: 2px solid #42A948;
+}
+
+.ng-invalid:not(form).ng-touched  {
+    border: 2px solid #a94442;
+}
+
+.form-control {
+    border: 2px solid #D3C1F0;
+}
+
+.form-select {
+    border: 2px solid #D3C1F0;
+}
+/* ANGULAR STYLES ENDS */
