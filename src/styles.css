@@ -9,6 +9,7 @@
     --text-color-dark: #150828;
     --text-color-light: #FFFFFF;
     /* Palette ends */
+    --primary-color-90: rgba(21, 8, 40, 0.9);
     --accent-color-90: rgba(109, 43, 189, 0.9);
     --accent-color-2-90: rgba(249, 218, 37, 0.9);
 }

@@ -3,5 +3,22 @@
 }
 
 .nav-link {
+    padding: 20px 20px;
+    background-color: var(--primary-color);
     color: var(--text-color-light);
+}
+
+.nav-link:hover {
+    background-color: var(--background-color) !important;
+    color: var(--text-color-dark);
+}
+
+.dropdown-item {
+    padding: 10px 20px;
+    border-radius: 0.375rem;
+}
+
+.dropdown-item:hover {
+    background-color: var(--background-color) !important;
+    color: var(--text-color-dark);
 }

@@ -1,29 +1,33 @@
 <div class="sidebar background-primary p-3 vh-100">
     <div class="text-center">
-        <h1>EduRoom</h1>
+        <h1 class="p-3 mb-0">EduRoom</h1>
     </div>
-    <hr>
+    <hr class="m-0 mb-5">
     <nav>
         <ul class="nav nav-pills flex-column">
             <!-- ADMIN OPTIONS -->
             @if (userRol === 'admin') {
-                <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Asistencias</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="admin/attendance-overview">Resumen</a></li>
-                        <li><a class="dropdown-item" routerLink="admin/take-attendance">Tomar asistencia</a></li>
-                        <li><a class="dropdown-item" routerLink="admin/edit-attendance">Editar asistencia</a></li>
-                        <li><a class="dropdown-item" routerLink="admin/justify-absence">Justificar inasistencia</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown">
-                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" routerLink="admin/generate-reports">Generar reporte</a></li>
-                        <li><a class="dropdown-item" routerLink="admin/absence-reports">Reporte de inasistencias</a></li>
-                    </ul>
-                </div>
+                <li><a class="nav-link" routerLink="admin/dashboard">Dashboard</a></li>
+                <li>
+                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#attendance-collapse" aria-expanded="false">Asistencias</a>
+                    <div class="collapse ps-3 pe-3" id="attendance-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a class="dropdown-item" routerLink="admin/attendance-overview">Resumen</a></li>
+                            <li><a class="dropdown-item" routerLink="admin/take-attendance">Tomar asistencia</a></li>
+                            <li><a class="dropdown-item" routerLink="admin/edit-attendance">Editar asistencia</a></li>
+                            <li><a class="dropdown-item" routerLink="admin/justify-absence">Justificar inasistencia</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#reports-collapse" aria-expanded="false">Reportes</a>
+                    <div class="collapse ps-3 pe-3" id="reports-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a class="dropdown-item" routerLink="admin/generate-reports">Generar reporte</a></li>
+                            <li><a class="dropdown-item" routerLink="admin/absence-reports">Reporte de inasistencias</a></li>
+                        </ul>
+                    </div>
+                </li>
                 <a class="nav-link" routerLink="admin/user-management">Usuarios</a>
             }
             <!-- ADMIN OPTIONS ENDS -->
