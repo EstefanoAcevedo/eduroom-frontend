@@ -1,67 +1,17 @@
 <header class="background">
     <nav class="navbar navbar-expand-md text-center">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold">EduRoom</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav">
-                <!-- ADMIN OPTIONS -->
-                    <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
-                    <div class="dropdown">
-                        <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Asistencias</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="admin/attendance-overview">Resumen</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/take-attendance">Tomar asistencia</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/edit-attendance">Editar asistencia</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/justify-absence">Justificar inasistencia</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="admin/generate-reports">Generar reporte</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/absence-reports">Reporte de inasistencias</a></li>
-                        </ul>
-                    </div>
-                    <a class="nav-link" routerLink="admin/user-management">Usuarios</a>
-                <!-- ADMIN OPTIONS ENDS -->
-                <!-- STUDENT OPTIONS -->
-                    <div class="dropdown">
-                        <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Estudiantes</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="student/dashboard">Dashboard</a></li>
-                            <li><a class="dropdown-item" routerLink="student/subjects">Asignaturas</a></li>
-                            <li><a class="dropdown-item" routerLink="student/attendance-history">Historial de Asistencias</a></li>
-                        </ul>
-                    </div>
-                <!-- STUDENT OPTIONS ENDS -->
-                <!-- TEACHER OPTIONS -->
-                    <div class="dropdown">
-                        <a class="nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Profesores</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" routerLink="teacher/dashboard">Dashboard</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/subjects">Asignaturas</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/take-attendance">Tomar de Asistencias</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/attendance-list">Lista de Asistencias</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/edit-attendance">Editar de Asistencias</a></li>
-                        </ul>
-                    </div>
-                <!-- TEACHER OPTIONS ENDS -->
-                </div>
-                <div class="navbar-nav ms-auto">
-                    <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center text-decoration-none justify-content-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="favicon.ico" alt="Usuario" class="rounded-circle border b-primary" width="40" height="40">
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Configuración</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                        </ul>
-                    </div>
+            <div class="navbar-nav ms-auto">
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-decoration-none justify-content-center dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="favicon.ico" alt="Usuario" class="rounded-circle border b-primary" width="40" height="40">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                        <li><a class="dropdown-item">Perfil</a></li>
+                        <li><a class="dropdown-item">Configuración</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item">Cerrar sesión</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

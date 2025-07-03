@@ -1,0 +1,54 @@
+<div class="sidebar background-primary p-3 vh-100">
+    <div class="text-center">
+        <h1>EduRoom</h1>
+    </div>
+    <hr>
+    <nav>
+        <ul class="nav nav-pills flex-column">
+            <!-- ADMIN OPTIONS -->
+            @if (userRol === 'admin') {
+                <a class="nav-link" routerLink="admin/dashboard">Dashboard</a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Asistencias</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="admin/attendance-overview">Resumen</a></li>
+                        <li><a class="dropdown-item" routerLink="admin/take-attendance">Tomar asistencia</a></li>
+                        <li><a class="dropdown-item" routerLink="admin/edit-attendance">Editar asistencia</a></li>
+                        <li><a class="dropdown-item" routerLink="admin/justify-absence">Justificar inasistencia</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Reportes</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="admin/generate-reports">Generar reporte</a></li>
+                        <li><a class="dropdown-item" routerLink="admin/absence-reports">Reporte de inasistencias</a></li>
+                    </ul>
+                </div>
+                <a class="nav-link" routerLink="admin/user-management">Usuarios</a>
+            }
+            <!-- ADMIN OPTIONS ENDS -->
+            <!-- STUDENT OPTIONS -->
+            @if (userRol === 'student') {
+                <a class="nav-link" routerLink="student/dashboard">Dashboard</a>
+                <a class="nav-link" routerLink="student/subjects">Asignaturas</a>
+                <a class="nav-link" routerLink="student/attendance-history">Historial de Asistencias</a>
+            }
+            <!-- STUDENT OPTIONS ENDS -->
+            
+            <!-- TEACHER OPTIONS -->
+            @if (userRol === 'teacher') {
+                <a class="nav-link" routerLink="teacher/dashboard">Dashboard</a>
+                <a class="nav-link" routerLink="teacher/subjects">Asignaturas</a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Asistencia</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" routerLink="teacher/take-attendance">Tomar Asistencia</a></li>
+                        <li><a class="dropdown-item" routerLink="teacher/attendance-list">Lista de Asistencias</a></li>
+                        <li><a class="dropdown-item" routerLink="teacher/edit-attendance">Editar Asistencias</a></li>
+                    </ul>
+                </div>
+            }
+            <!-- TEACHER OPTIONS ENDS -->
+        </ul>
+    </nav>
+</div>

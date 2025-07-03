@@ -1,0 +1,7 @@
+.sidebar {
+    min-width: 300px
+}
+
+.nav-link {
+    color: var(--text-color-light);
+}
