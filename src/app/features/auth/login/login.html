@@ -11,7 +11,7 @@
             <div class="card shadow-sm p-4 w-100" style="max-width: 400px; border-radius: 1rem;">
 
                 <div class="text-center mb-4">
-                    <img src="EduRoom_logo.png" height="300" width="300" alt="Logo EduRoom" />
+                    <img class="m-1" src="EduRoom_logo.png" height="250" width="250" alt="Logo EduRoom" />
 
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
 
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="mb-3 text-end">
-                            <a routerLink="/public/auth/password-recovery" class="small text-decoration-none">¿Olvidaste
+                            <a routerLink="/public/auth/password-recovery" class="small a-accent">¿Olvidaste
                                 tu
                                 contraseña?</a>
                         </div>
@@ -47,7 +47,7 @@
                         <button type="submit" class="button-accent w-100">Iniciar Sesión</button>
 
                         <div class="text-center mt-3">
-                            <a routerLink="/public/auth/register" class="small text-decoration-none">¿No tienes cuenta?
+                            <a routerLink="/public/auth/register" class="small a-accent">¿No tienes cuenta?
                                 Regístrate</a>
                         </div>
 

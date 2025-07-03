@@ -1,35 +1,51 @@
+/* CSS VARIABLES */
+:root {
+    /* Palette */
+    --primary-color: #150828;
+    --secondary-color: #D3C1F0;
+    --accent-color: #6D2BCD;
+    --accent-color-2: #F9DA25;
+    --background-color: #FBFBFE;
+    --text-color-dark: #150828;
+    --text-color-light: #FFFFFF;
+    /* Palette ends */
+    --accent-color-90: rgba(109, 43, 189, 0.9);
+    --accent-color-2-90: rgba(249, 218, 37, 0.9);
+}
+/* CSS VARIABLES ENDS */
+
 /* BACKGROUND */
 .background {
-    background-color: #FBFBFE;
-    color: #150828;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
 }
 
 .background-primary {
-    background-color: #150828;
-    color: #FFFFFF;
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
 }
 
 .background-secondary {
-    background-color: #D3C1F0;
-    color: #150828;
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark);
 }
 
 .background-accent {
-    background-color: #6D2BCD;
-    color: #FFFFFF;
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
 }
 
-.background-accent2 {
-    background-color: #F9DA25;
-    color: #150828;
+.background-accent-2 {
+    background-color: var(--accent-color-2);
+    color: var(--text-color-dark);
 }
 /* END BACKGROUND */
 
 
 /* BUTTONS */
 .button-accent {
-    background-color: #6D2BCD;
-    color: #FFFFFF;
+    background-color: var(--accent-color);
+    color: var(--text-color-light);
     letter-spacing: 1px;
     font-weight: 500;
     padding: 10px 20px;
@@ -38,16 +54,16 @@
 }
 
 .button-accent:hover {
-    background-color: #904cf7;
+    background-color: var(--accent-color-90);
 }
 
 .button-accent:active {
-    background-color: #421682;
+    background-color: var(--accent-color);
 }
 
 .button-accent2 {
-    background-color: #F9DA25;
-    color: #150828;
+    background-color: var(--accent-color-2);
+    color: var(--text-color-dark);
     letter-spacing: 1px;
     font-weight: 500;
     padding: 10px 20px;
@@ -56,36 +72,36 @@
 }
 
 .button-accent2:hover {
-    background-color: #FFEB74;
+    background-color: var(--accent-color-2-90);
 }
 
 .button-accent2:active {
-    background-color: #B19A19;
+    background-color: var(--accent-color-2);
 }
 /* BUTTONS ENDS */
 
 /* BORDERS */
 .b-primary {
-    border-color: #150828 !important;
+    border-color: var(--primary-color) !important;
 }
 
 .b-accent {
-    border-color: #6D2BCD !important;
+    border-color: var(--accent-color) !important;
 }
 
 .b-accent2 {
-    border-color: #F9DA25 !important;
+    border-color: var(--accent-color-2) !important;
 }
 /* BORDERS ENDS */
 
 /* A */
 .a-accent {
-    color: #150828;
+    color: var(--accent-color);
     text-decoration: none;
 }
 
 .a-accent:hover {
-    color: #6D2BCD;
+    color: var(--accent-color);
     text-decoration: underline;
 }
 /* A ENDS */
@@ -100,10 +116,10 @@
 }
 
 .form-control {
-    border: 2px solid #D3C1F0;
+    border: 2px solid var(--secondary-color);
 }
 
 .form-select {
-    border: 2px solid #D3C1F0;
+    border: 2px solid var(--secondary-color);
 }
 /* ANGULAR STYLES ENDS */
