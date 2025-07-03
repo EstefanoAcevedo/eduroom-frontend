@@ -1,1 +1,74 @@
-<p>student-dashboard works!</p>
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <!-- Panel lateral izquierdo -->
+        <div class="col-md-3 mb-3">
+            <div class="list-group shadow-sm">
+                <div class="list-group-item active" aria-current="true">
+                    Panel del Estudiante
+                </div>
+                <a class="list-group-item list-group-item-action" routerLink="/student-dashboard"
+                    routerLinkActive="active">
+                    Inicio
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/student-subjects"
+                    routerLinkActive="active">
+                    Mis Materias
+                </a>
+                <a class="list-group-item list-group-item-action" routerLink="/student-attendance-history"
+                    routerLinkActive="active">
+                    Asistencias
+                </a>
+            </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="col-md-9">
+            <h2 class="mb-4">Bienvenido, {{ estudiante?.nombre }}</h2>
+
+            <div class="row">
+                <!-- Asistencia reciente -->
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Asistencia reciente</h5>
+                            <p class="card-text">
+                                Tu última asistencia fue el <strong>{{ ultimaAsistencia?.fecha }}</strong> en
+                                <strong>{{ ultimaAsistencia?.materia }}</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Materias activas -->
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Materias activas</h5>
+                            <ul class="list-group list-group-flush">
+                                <li *ngFor="let materia of materiasActivas" class="list-group-item">
+                                    {{ materia.nombre }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notificaciones -->
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Notificaciones</h5>
+                            <ul class="list-group list-group-flush">
+                                <li *ngFor="let notif of notificaciones" class="list-group-item">
+                                    {{ notif.mensaje }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
