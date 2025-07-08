@@ -1,8 +1,8 @@
-<div class="d-flex">
-    <app-sidebar></app-sidebar>
-    <div class="content flex-grow-1">
-        <app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="d-flex flex-column">
+    <app-header></app-header>
+    <div class="background">
         <router-outlet></router-outlet>
     </div>
 </div>
-<!-- <app-footer></app-footer> -->
+<app-footer></app-footer>
