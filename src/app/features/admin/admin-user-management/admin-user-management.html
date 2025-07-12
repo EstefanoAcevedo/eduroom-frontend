@@ -1,1 +1,24 @@
-<p>admin-user-management works!</p>
+<nav class="bg-white border shadow-sm rounded p-4 mb-3">
+    <div class="row">
+        <div class="col-12 col-sm-6 p-1 d-flex">
+            <button (click)="showUserListTable = true" class="button-accent flex-grow-1" aria-current="page">Lista de Usuarios</button>
+        </div>
+        <div class="col-12 col-sm-6 p-1 d-flex">
+            <button (click)="showUserListTable = false" class="button-accent flex-grow-1" aria-current="page">Solicitudes de registro</button>
+        </div>
+    </div>
+</nav>
+<div class="">
+    @if (showUserListTable) {
+        <div class="fade show">
+            <app-admin-user-list-table></app-admin-user-list-table>
+        </div>
+    } @else {
+        <div class="fade show">
+            <app-admin-user-register-request></app-admin-user-register-request>
+        </div>
+    }
+</div>
+
+
+
