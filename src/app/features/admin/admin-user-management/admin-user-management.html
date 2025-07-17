@@ -8,17 +8,12 @@
         </div>
     </div>
 </nav>
-<div class="">
-    @if (showUserListTable) {
-        <div class="fade show">
-            <app-admin-user-list-table></app-admin-user-list-table>
-        </div>
-    } @else {
-        <div class="fade show">
-            <app-admin-user-register-request></app-admin-user-register-request>
-        </div>
-    }
-</div>
+@if (showUserListTable) {
+    <app-admin-user-list-table></app-admin-user-list-table>
+} @else {
+    <app-admin-user-register-request></app-admin-user-register-request>
+}
+
 
 
 

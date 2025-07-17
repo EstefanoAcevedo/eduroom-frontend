@@ -42,7 +42,6 @@
 }
 /* END BACKGROUND */
 
-
 /* BUTTONS */
 .button-accent {
     background-color: var(--accent-color);
@@ -108,11 +107,11 @@
 /* A ENDS */
 
 /* ANGULAR STYLES */
-.ng-valid:not(form).ng-touched {
+.ng-valid:not(form):not(tbody):not(tr).ng-touched {
     border: 2px solid #42A948;
 }
 
-.ng-invalid:not(form).ng-touched  {
+.ng-invalid:not(form):not(tbody):not(tr).ng-touched  {
     border: 2px solid #a94442;
 }
 

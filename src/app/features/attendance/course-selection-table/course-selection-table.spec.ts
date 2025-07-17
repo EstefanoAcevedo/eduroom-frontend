@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AttendanceFilter } from './attendance-filter';
+import { CourseSelectionTable } from './course-selection-table';
 
-describe('AttendanceFilter', () => {
-  let component: AttendanceFilter;
-  let fixture: ComponentFixture<AttendanceFilter>;
+describe('CourseSelectionTable', () => {
+  let component: CourseSelectionTable;
+  let fixture: ComponentFixture<CourseSelectionTable>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AttendanceFilter]
+      imports: [CourseSelectionTable]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AttendanceFilter);
+    fixture = TestBed.createComponent(CourseSelectionTable);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
