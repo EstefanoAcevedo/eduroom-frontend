@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Form, Validators } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-selection-table',
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './course-selection-table.html',
   styleUrl: './course-selection-table.css'
 })
@@ -53,19 +52,34 @@ export class CourseSelectionTable {
 
   newAttendances() {
     this.enrollments.forEach(enrollment => {
-    const formControl = this.formBuilder.group({
-      enrollment_id: enrollment.enrollment_id,
-      attendance_state_id: [0, Validators.compose([Validators.required, Validators.min(1)])],
+      const formControl = this.formBuilder.group({
+        enrollment_id: enrollment.enrollment_id,
+        attendance_state_id: [0, Validators.compose([Validators.required, Validators.min(1)])],
+      });
+      (this.attendancesForm.get('attendances') as FormArray).push(formControl);
     });
-    (this.attendancesForm.get('attendances') as FormArray).push(formControl);
-  });
   }
+
+  get attendance_date() {
+    return this.attendancesForm.controls.attendance_date;
+  }
+  get attendances(): FormArray {
+    return this.attendancesForm.controls.attendances;
+  }
+
+  isAttendancesInvalid : boolean = false
 
   registerAttendance() {
     if (this.attendancesForm.valid) {
       console.log(this.attendancesForm.value);
+      this.isAttendancesInvalid = false;
+    
+    } else if (this.attendances.invalid) {
+      this.isAttendancesInvalid = true;
+      this.attendancesForm.markAllAsTouched();
+    
     } else {
-      this.attendancesForm.markAllAsTouched()
+      this.attendancesForm.markAllAsTouched();
     }
   }
 

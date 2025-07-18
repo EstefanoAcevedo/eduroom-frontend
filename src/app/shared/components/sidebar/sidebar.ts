@@ -9,6 +9,6 @@ import { RouterLink } from '@angular/router';
 })
 export class Sidebar {
 
-    userRol: string = 'admin';
+    userRol: string = 'student';
 
 }

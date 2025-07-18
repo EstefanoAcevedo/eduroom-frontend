@@ -39,11 +39,19 @@
                 <input formControlName="attendance_date" class="form-control" type="date">
             </div>
         </div>
+        @if (attendance_date.invalid && (attendance_date.dirty || attendance_date.touched)) {
+            @if (attendance_date.hasError("required")) {
+                <p class="alert alert-danger">Seleccione la fecha de la asistencia</p>
+            }
+        } 
+        @if (isAttendancesInvalid) {
+            <p class="alert alert-danger">Falta tomar la asistencia de uno o más estudiantes</p>
+        }
         <div class="table-responsive rounded">
             <table class="table table-bordered table-striped align-middle">
                 <thead class="table-dark text-center">
                     <tr>
-                        <th scope="col">Ciclo lectivo</th>
+                        <th scope="col" class="d-none d-sm-table-cell">Ciclo lectivo</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Estado</th>
@@ -52,7 +60,7 @@
                 <tbody formArrayName="attendances">
                     @for (enrollment of enrollments; track $index) {
                         <tr [formGroupName]="$index">
-                            <td>{{enrollment.enrollment_academic_year}}</td>
+                            <td class="d-none d-sm-table-cell">{{enrollment.enrollment_academic_year}}</td>
                             <td>{{enrollment.user_id.user_name}}</td>
                             <td>{{enrollment.user_id.user_lastname}}</td>
                             <td>
@@ -72,5 +80,4 @@
             </div>
         </div>
     </form>
-    <pre>{{attendancesForm.value | json}}</pre>
 </section>
