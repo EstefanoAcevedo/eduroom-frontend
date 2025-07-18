@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CourseSelectionTable } from "../../attendance/course-selection-table/course-selection-table";
+import { TakeAttendance } from "../../attendance/take-attendance/take-attendance";
 
 @Component({
   selector: 'app-admin-take-attendance',
-  imports: [CourseSelectionTable],
+  imports: [TakeAttendance],
   templateUrl: './admin-take-attendance.html',
   styleUrl: './admin-take-attendance.css'
 })

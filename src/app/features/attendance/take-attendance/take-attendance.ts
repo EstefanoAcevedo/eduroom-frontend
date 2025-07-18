@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-course-selection-table',
+  selector: 'app-take-attendance',
   imports: [ReactiveFormsModule],
-  templateUrl: './course-selection-table.html',
-  styleUrl: './course-selection-table.css'
+  templateUrl: './take-attendance.html',
+  styleUrl: './take-attendance.css'
 })
-export class CourseSelectionTable {
+export class TakeAttendance {
 
   private formBuilder = inject(FormBuilder);
 
