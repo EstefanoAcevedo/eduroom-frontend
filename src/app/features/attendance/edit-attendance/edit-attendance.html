@@ -1,7 +1,7 @@
 <section class="bg-white border shadow-sm rounded p-4 mb-3">
-    <h3 class="mb-3">Selector de comisiones</h3>
+    <h3 class="mb-3">Selector de asistencias previas</h3>
     <form [formGroup]="commissionForm" class="row g-3">
-        <div class="col-12 col-xl-4">
+        <div class="col-12 col-sm-6 col-xl-3">
             <label class="form-label">Carrera</label>
             <select formControlName="career" (change)="onCareerChange()" class="form-select">
                 <option value="0" selected disabled>Seleccione una carrera</option>
@@ -10,7 +10,7 @@
                 }
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-xl-4">
+        <div class="col-12 col-sm-6 col-xl-3">
             <label class="form-label">Asignatura</label>
             <select formControlName="subject" (change)="onSubjectChange()" class="form-select">
                 <option value="0" selected disabled>Seleccione una asignatura</option>
@@ -19,7 +19,7 @@
                 }
             </select>
         </div>
-        <div class="col-12 col-sm-6 col-xl-4">
+        <div class="col-12 col-sm-6 col-xl-3">
             <label class="form-label">Comisión</label>
             <select formControlName="commission" (change)="onCommissionChange()" class="form-select">
                 <option value="0" selected disabled>Seleccione una comisión</option>
@@ -28,26 +28,18 @@
                 }
             </select>
         </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+            <label class="form-label">Fecha</label>
+            <input formControlName="attendance_date" (change)="onAttendanceDateChange()" class="form-control" type="date">
+        </div>
     </form>
 </section>
 @if (isCommissionSelected) {
     <section class="bg-white border shadow-sm rounded p-4 mb-3">
         <form [formGroup]="attendancesForm">
-            <div class="d-flex flex-wrap justify-content-between mb-3">
-                <h3>Tomar asistencia</h3>
-                <div class="d-flex align-items-center">
-                    <label class="form-label me-2 mb-0">Fecha</label>
-                    <input formControlName="attendance_date" class="form-control" type="date">
-                </div>
+            <div class="mb-3">
+                <h3>Editar asistencia</h3>
             </div>
-            @if (attendance_date.invalid && (attendance_date.dirty || attendance_date.touched)) {
-                @if (attendance_date.hasError("required")) {
-                    <p class="alert alert-danger">Seleccione la fecha de la asistencia</p>
-                }
-            } 
-            @if (isAttendancesInvalid) {
-                <p class="alert alert-danger">Falta tomar la asistencia de uno o más estudiantes</p>
-            }
             <div class="table-responsive rounded">
                 <table class="table table-bordered table-striped align-middle">
                     <thead class="table-dark text-center">
@@ -77,7 +69,7 @@
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                    <button (click)="registerAttendance()" class="button-accent">Registar asistencia</button>
+                    <button (click)="editAttendance()" class="button-accent">Editar asistencia</button>
                 </div>
             </div>
         </form>
@@ -87,5 +79,6 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
             <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
         </svg>
-        Seleccione una carrera, una asignatura y una comisión para tomar su asistencia </p>
+        Seleccione la carrera, la asignatura, la comisión y la fecha de una asistencia para editarla 
+    </p>
 }

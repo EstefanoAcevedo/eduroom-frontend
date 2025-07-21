@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-take-attendance',
+  selector: 'app-edit-attendance',
   imports: [ReactiveFormsModule],
-  templateUrl: './take-attendance.html',
-  styleUrl: './take-attendance.css'
+  templateUrl: './edit-attendance.html',
+  styleUrl: './edit-attendance.css'
 })
-export class TakeAttendance {
+export class EditAttendance {
 
   private formBuilder = inject(FormBuilder);
 
@@ -32,10 +32,10 @@ export class TakeAttendance {
   commissionForm = this.formBuilder.group({
     career: ['0', Validators.compose([Validators.required, Validators.min(1)])],
     subject: [{ value: '0', disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
-    commission: [{ value: '0', disabled: true }, Validators.compose([Validators.required, Validators.min(1)])]
+    commission: [{ value: '0', disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
+    attendance_date: [{ value: '0', disabled: true }, Validators.compose([Validators.required])]
   })
 
-  /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de carreras */
   onCareerChange() {
     this.subjects = [
       {subject_id: 1, subject_name: 'Programación III', career_id: 1},
@@ -45,7 +45,6 @@ export class TakeAttendance {
     this.commissionForm.controls.subject.enable();
   }
 
-    /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de asignaturas */
   onSubjectChange() {
     this.commissions = [
       {commission_id: 1, commission_name: 'Primera división'},
@@ -55,8 +54,11 @@ export class TakeAttendance {
     this.commissionForm.controls.commission.enable();
   }
 
-    /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de comisiones */
   onCommissionChange() {
+    this.commissionForm.controls.attendance_date.enable();
+  }
+  
+  onAttendanceDateChange() {
     this.enrollments = [
       {enrollment_id: 1, enrollment_academic_year: 2025, user_id: {user_lastname: 'Acevedo', user_name: 'Estéfano Marcial'}},
       {enrollment_id: 2, enrollment_academic_year: 2025, user_id: {user_lastname: 'Bracamonte', user_name: 'Adrián Alejandro'}},
@@ -72,7 +74,6 @@ export class TakeAttendance {
     {attendance_state_id: 3, attendance_state_name: 'Ausente'},
   ]
 
-  /* Formulario de asistencia */
   attendancesForm = this.formBuilder.group({
     attendance_date: ['', Validators.compose([Validators.required])],
     attendances: this.formBuilder.array([])
@@ -82,7 +83,7 @@ export class TakeAttendance {
     this.enrollments.forEach(enrollment => {
       const formControl = this.formBuilder.group({
         enrollment_id: enrollment.enrollment_id,
-        attendance_state_id: [0, Validators.compose([Validators.required, Validators.min(1)])],
+        attendance_state_id: [1, Validators.compose([Validators.required, Validators.min(1)])],
       });
       (this.attendancesForm.get('attendances') as FormArray).push(formControl);
     });
@@ -95,18 +96,9 @@ export class TakeAttendance {
     return this.attendancesForm.controls.attendances;
   }
 
-  /* Variable utilizada para determinar cuándo mostrar el mensaje de error "Falta tomar la asistencia de uno o más estudiantes" */
-  isAttendancesInvalid : boolean = false
-
-  registerAttendance() {
+  editAttendance() {
     if (this.attendancesForm.valid) {
       console.log(this.attendancesForm.value);
-      this.isAttendancesInvalid = false;
-    
-    } else if (this.attendances.invalid) {
-      this.isAttendancesInvalid = true;
-      this.attendancesForm.markAllAsTouched();
-    
     } else {
       this.attendancesForm.markAllAsTouched();
     }
