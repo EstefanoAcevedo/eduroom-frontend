@@ -1,0 +1,72 @@
+<div id="modal-admin-absence-reports-filter" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header background-accent">
+                <h5 class="modal-title">Filtros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section>
+                    <form [formGroup]="reportForm" class="row g-3">
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Carrera</label>
+                            <select formControlName="career" (change)="onCareerChange()" class="form-select">
+                                <option value="0" selected disabled>Seleccione una carrera</option>
+                                @for (career of careers; track $index) {
+                                    <option value="{{career.career_id}}">{{career.career_name}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Asignatura</label>
+                            <select formControlName="subject" (change)="onSubjectChange()" class="form-select">
+                                <option value="0" selected disabled>Seleccione una asignatura</option>
+                                @for (subject of subjects; track $index) {
+                                    <option value="{{subject.subject_id}}">{{subject.subject_name}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Comisión</label>
+                            <select formControlName="commission" (change)="onCommissionChange()" class="form-select">
+                                <option value="0" selected disabled>Seleccione una comisión</option>
+                                @for (commission of commissions; track $index) {
+                                    <option value="{{commission.commission_id}}">{{commission.commission_name}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Estudiantes</label>
+                            <select formControlName="students" class="form-select">
+                                <option value="0" selected>Todos</option>
+                                @for (enrollment of enrollments; track $index) {
+                                    <option value="{{enrollment.enrollment_id}}">{{enrollment.user_id.user_lastname}}, {{enrollment.user_id.user_name}}</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Fecha inicial</label>
+                            <input formControlName="report_from_date" class="form-control" type="date">
+                        </div>
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <label class="form-label">Fecha final</label>
+                            <input formControlName="report_to_date" class="form-control" type="date">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Nombre del reporte</label>
+                            <input formControlName="report_name" class="form-control" type="text">
+                            @if (report_name.invalid && (report_name.dirty || report_name.touched)) {
+                                @if (report_name.hasError("maxLength")) {
+                                    <p class="text-danger">El largo del nombre debe ser menor a 255 caracteres</p>
+                                }
+                            }
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button (click)="onSubmit()" class="button-accent">Buscar</button>
+            </div>
+        </div>
+    </div>
+</div>
