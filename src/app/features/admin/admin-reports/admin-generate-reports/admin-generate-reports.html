@@ -1,1 +1,115 @@
-<p>admin-generate-reports works!</p>
+<section class="bg-white border shadow-sm rounded p-4 mb-3">
+    <h3 class="mb-3">Generar reporte de inasistencias</h3>
+    <form [formGroup]="reportForm" class="row g-3">
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Carrera</label>
+            <select formControlName="career" (change)="onCareerChange()" class="form-select">
+                <option value="0" selected disabled>Seleccione una carrera</option>
+                @for (career of careers; track $index) {
+                    <option value="{{career.career_id}}">{{career.career_name}}</option>
+                }
+            </select>
+            @if (career.invalid && (career.dirty || career.touched)) {
+                @if (career.hasError("min")) {
+                    <p class="text-danger">Seleccione una carrera</p>
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Asignatura</label>
+            <select formControlName="subject" (change)="onSubjectChange()" class="form-select">
+                <option value="0" selected disabled>Seleccione una asignatura</option>
+                @for (subject of subjects; track $index) {
+                    <option value="{{subject.subject_id}}">{{subject.subject_name}}</option>
+                }
+            </select>
+            @if (subject.invalid && (subject.dirty || subject.touched)) {
+                @if (subject.hasError("min")) {
+                    <p class="text-danger">Seleccione una asignatura</p>
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Comisión</label>
+            <select formControlName="commission" (change)="onCommissionChange()" class="form-select">
+                <option value="0" selected disabled>Seleccione una comisión</option>
+                @for (commission of commissions; track $index) {
+                    <option value="{{commission.commission_id}}">{{commission.commission_name}}</option>
+                }
+            </select>
+            @if (commission.invalid && (commission.dirty || commission.touched)) {
+                @if (commission.hasError("min")) {
+                    <p class="text-danger">Seleccione una comisión</p>
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Estudiantes</label>
+            <select formControlName="students" (change)="onStudentChange()" class="form-select">
+                <option value="0" selected>Todos</option>
+                @for (enrollment of enrollments; track $index) {
+                    <option value="{{enrollment.enrollment_id}}">{{enrollment.user_id.user_lastname}}, {{enrollment.user_id.user_name}}</option>
+                }
+            </select>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Fecha inicial</label>
+            <input formControlName="report_from_date" class="form-control" type="date">
+            @if (report_from_date.invalid && (report_from_date.dirty || report_from_date.touched)) {
+                @if (report_from_date.hasError("required")) {
+                    <p class="text-danger">Indique la fecha incial</p>
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-xl-4">
+            <label class="form-label">Fecha final</label>
+            <input formControlName="report_to_date" class="form-control" type="date">
+            @if (report_to_date.invalid && (report_to_date.dirty || report_to_date.touched)) {
+                @if (report_to_date.hasError("required")) {
+                    <p class="text-danger">Indique la fecha final</p>
+                }
+            }
+        </div>
+        <div class="col-12">
+            <label class="form-label">Nombre del reporte</label>
+            <input formControlName="report_name" class="form-control" type="text">
+            @if (report_name.invalid && (report_name.dirty || report_name.touched)) {
+                @if (report_name.hasError("required")) {
+                    <p class="text-danger">Indique el nombre del reporte</p>
+                }
+                @if (report_name.hasError("maxLength")) {
+                    <p class="text-danger">El largo del nombre debe ser menor a 255 caracteres</p>
+                }
+            }
+        </div>
+        <div class="col-12 text-end">
+            <button (click)="onSubmit()" class="button-accent">Generar reporte</button>
+        </div>
+    </form>
+</section>
+@if(isReportGenerated) {
+    <section class="bg-white border shadow-sm rounded p-4 mb-3">
+        <h3 class="mb-3">{{report?.report_name}}</h3>
+        <p>Fecha inicial: {{report?.report_from_date}} | Fecha final:  {{report?.report_to_date}}</p>
+        <div class="table-responsive rounded">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Asistencia</th>
+                        <th scope="col">% Asistencia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5" class="text-center"> 
+                            Datos - Es posible usar Apache ECharts
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+}
