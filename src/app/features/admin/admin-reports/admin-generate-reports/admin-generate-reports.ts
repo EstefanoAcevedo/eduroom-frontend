@@ -92,7 +92,11 @@ export class AdminGenerateReports {
   }
 
   onStudentChange() {
-    this.report_name.setValue(`${this.getSelectedCareerName()} - ${this.getSelectedSubjectName()} - ${this.getSelectedCommissionName()} - ${this.getSelectedStudentName()}`);
+    if (this.getSelectedStudentName() === "Todos") {
+      this.report_name.setValue(`${this.getSelectedCareerName()} - ${this.getSelectedSubjectName()} - ${this.getSelectedCommissionName()}`);
+    } else {
+      this.report_name.setValue(`${this.getSelectedCareerName()} - ${this.getSelectedSubjectName()} - ${this.getSelectedCommissionName()} - ${this.getSelectedStudentName()}`);
+    }
   }
 
   report: {report_id: number, report_name: string, report_from_date: string, report_to_date: string} | undefined;

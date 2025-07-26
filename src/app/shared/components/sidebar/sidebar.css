@@ -4,6 +4,7 @@
 
 .nav-link {
     padding: 20px 20px;
+    border-radius: 0.375rem;
     background-color: var(--primary-color);
     color: var(--text-color-light);
 }

@@ -8,122 +8,145 @@
     </div>
     <hr class="m-0 mb-5">
     <nav class="offcanvas-body">
-        <ul id="ul" class="nav nav-pills flex-column">
-            <!-- ADMIN OPTIONS -->
-            @if (userRol === 'admin') {
-                <li>
-                    <a class="nav-link" routerLink="admin/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
-                            <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
+        <div class="d-flex flex-column justify-content-between h-100">
+            <ul id="ul" class="nav nav-pills flex-column">
+                <!-- ADMIN OPTIONS -->
+                @if (userRol === 'admin') {
+                    <li>
+                        <a class="nav-link" routerLink="admin/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
+                                <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#admin-attendance-collapse" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            Asistencias
+                        </a>
+                        <div class="collapse ps-3 pe-3" id="admin-attendance-collapse" data-bs-parent="#ul">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a class="dropdown-item" routerLink="admin/attendance-overview" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Resumen</a></li>
+                                <li><a class="dropdown-item" routerLink="admin/take-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Tomar asistencia</a></li>
+                                <li><a class="dropdown-item" routerLink="admin/edit-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Editar asistencia</a></li>
+                                <li><a class="dropdown-item" routerLink="admin/justify-absence" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Justificar inasistencia</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#reports-collapse" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 21 21">
+                            <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
                         </svg>
-                        Dashboard
+                            Reportes
+                        </a>
+                        <div class="collapse ps-3 pe-3" id="reports-collapse" data-bs-parent="#ul">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a class="dropdown-item" routerLink="admin/generate-reports" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Generar reporte</a></li>
+                                <li><a class="dropdown-item" routerLink="admin/absence-reports" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Lista de reportes</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="admin/user-management" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 21 21">
+                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+                            </svg>
+                            Usuarios
+                        </a>
+                    </li>
+                }
+                <!-- ADMIN OPTIONS ENDS -->
+                <!-- STUDENT OPTIONS -->
+                @if (userRol === 'student') {
+                    <li>
+                        <a class="nav-link" routerLink="student/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
+                                <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="student/subjects" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 0 21 21">
+                                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+                                <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
+                            </svg>
+                            Asignaturas
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="student/attendance-history" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            Historial de Asistencias
+                        </a>
+                    </li>
+                }
+                <!-- STUDENT OPTIONS ENDS -->
+                <!-- TEACHER OPTIONS -->
+                @if (userRol === 'teacher') {
+                    <li>
+                        <a class="nav-link" routerLink="teacher/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
+                                <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" routerLink="teacher/subjects" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 0 21 21">
+                                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+                                <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
+                            </svg>
+                            Asignaturas
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#teacher-attendance-collapse" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            </svg>
+                            Asistencia
+                        </a>
+                        <div class="collapse ps-3 pe-3" id="teacher-attendance-collapse" data-bs-parent="#ul">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li><a class="dropdown-item" routerLink="teacher/take-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Tomar Asistencia</a></li>
+                                <li><a class="dropdown-item" routerLink="teacher/attendance-list" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Lista de Asistencias</a></li>
+                                <li><a class="dropdown-item" routerLink="teacher/edit-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Editar Asistencias</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                }
+                <!-- TEACHER OPTIONS ENDS -->
+            </ul>
+            <ul class="nav nav-pills flex-column">
+                <li>
+                    <a class="nav-link d-flex" routerLink="login" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                        <img src="https://github.com/mdo.png" alt="" width="55" height="55" class="rounded-circle me-2">
+                        <div class="d-flex flex-column">
+                            <span class="fs-5">[ Nombre de usuario ]</span>
+                            <span>[ Rol ]</span>
+                        </div>
                     </a>
                 </li>
+                <hr>
                 <li>
-                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#admin-attendance-collapse" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                    <a class="nav-link" routerLink="login" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                            <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15zM11 2h.5a.5.5 0 0 1 .5.5V15h-1zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
                         </svg>
-                        Asistencias
-                    </a>
-                    <div class="collapse ps-3 pe-3" id="admin-attendance-collapse" data-bs-parent="#ul">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a class="dropdown-item" routerLink="admin/attendance-overview" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Resumen</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/take-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Tomar asistencia</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/edit-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Editar asistencia</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/justify-absence" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Justificar inasistencia</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#reports-collapse" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-bar-chart-fill" viewBox="0 0 21 21">
-                        <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
-                    </svg>
-                        Reportes
-                    </a>
-                    <div class="collapse ps-3 pe-3" id="reports-collapse" data-bs-parent="#ul">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a class="dropdown-item" routerLink="admin/generate-reports" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Generar reporte</a></li>
-                            <li><a class="dropdown-item" routerLink="admin/absence-reports" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Lista de reportes</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a class="nav-link" routerLink="admin/user-management" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 21 21">
-                            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
-                        </svg>
-                        Usuarios
+                        Cerrar sesión
                     </a>
                 </li>
-            }
-            <!-- ADMIN OPTIONS ENDS -->
-            <!-- STUDENT OPTIONS -->
-            @if (userRol === 'student') {
-                <li>
-                    <a class="nav-link" routerLink="student/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
-                            <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" routerLink="student/subjects" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 0 21 21">
-                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
-                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
-                        </svg>
-                        Asignaturas
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" routerLink="student/attendance-history" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                        </svg>
-                        Historial de Asistencias
-                    </a>
-                </li>
-            }
-            <!-- STUDENT OPTIONS ENDS -->
-            <!-- TEACHER OPTIONS -->
-            @if (userRol === 'teacher') {
-                <li>
-                    <a class="nav-link" routerLink="teacher/dashboard" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-grid-1x2-fill" viewBox="0 0 21 21">
-                            <path d="M0 1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm9 0a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1zm0 9a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1z"/>
-                        </svg>
-                        Dashboard
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link" routerLink="teacher/subjects" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-mortarboard-fill" viewBox="0 0 21 21">
-                            <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
-                            <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
-                        </svg>
-                        Asignaturas
-                    </a>
-                </li>
-                <li>
-                    <a class="nav-link dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#teacher-attendance-collapse" aria-expanded="false">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 21 21">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5m9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5M8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
-                        </svg>
-                        Asistencia
-                    </a>
-                    <div class="collapse ps-3 pe-3" id="teacher-attendance-collapse" data-bs-parent="#ul">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a class="dropdown-item" routerLink="teacher/take-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Tomar Asistencia</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/attendance-list" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Lista de Asistencias</a></li>
-                            <li><a class="dropdown-item" routerLink="teacher/edit-attendance" data-bs-toggle="offcanvas" data-bs-target="#sidebar">Editar Asistencias</a></li>
-                        </ul>
-                    </div>
-                </li>
-            }
-            <!-- TEACHER OPTIONS ENDS -->
-        </ul>
+            </ul>
+        </div>
+        
     </nav>
 </div>
