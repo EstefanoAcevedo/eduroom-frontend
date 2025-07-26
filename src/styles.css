@@ -107,11 +107,11 @@
 /* A ENDS */
 
 /* ANGULAR STYLES */
-.ng-valid:not(form):not(tbody):not(tr).ng-touched {
+.ng-valid:not(form):not(ul):not(li).ng-touched {
     border: 2px solid #42A948;
 }
 
-.ng-invalid:not(form):not(tbody):not(tr).ng-touched  {
+.ng-invalid:not(form):not(ul):not(li).ng-touched  {
     border: 2px solid #a94442;
 }
 

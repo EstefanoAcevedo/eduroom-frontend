@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-edit-attendance',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './edit-attendance.html',
   styleUrl: './edit-attendance.css'
 })
@@ -64,6 +65,7 @@ export class EditAttendance {
       {enrollment_id: 2, enrollment_academic_year: 2025, user_id: {user_lastname: 'Bracamonte', user_name: 'Adrián Alejandro'}},
       {enrollment_id: 3, enrollment_academic_year: 2025, user_id: {user_lastname: 'Vanegas', user_name: 'Brian'}},
     ]
+    this.attendancesForm.controls.attendance_date.setValue(this.commissionForm.controls.attendance_date.value);
     this.newAttendances();
     this.isCommissionSelected = true;
   }
@@ -83,7 +85,7 @@ export class EditAttendance {
     this.enrollments.forEach(enrollment => {
       const formControl = this.formBuilder.group({
         enrollment_id: enrollment.enrollment_id,
-        attendance_state_id: [1, Validators.compose([Validators.required, Validators.min(1)])],
+        attendance_state_id: [3, Validators.compose([Validators.required, Validators.min(1)])],
       });
       (this.attendancesForm.get('attendances') as FormArray).push(formControl);
     });
@@ -94,6 +96,25 @@ export class EditAttendance {
   }
   get attendances(): FormArray {
     return this.attendancesForm.controls.attendances;
+  }
+
+  /* Función para alternar el estado de asistencia de un estudiante */
+  toggleAttendanceState(index: number) {
+    const attendanceState = this.attendances.at(index).get('attendance_state_id');
+    switch (attendanceState?.value) {
+      case 0: // Marcar como presente cuando aún no tiene estado
+          this.attendances.at(index).get('attendance_state_id')?.setValue(1);
+        break;
+      case 1: // Marcar como media falta cuando está como presente
+          this.attendances.at(index).get('attendance_state_id')?.setValue(2);
+        break;
+      case 2: // Marcar como ausente cuando está como media falta
+          this.attendances.at(index).get('attendance_state_id')?.setValue(3);
+        break;
+      default:  // Marcar como presente en cualquier otro caso
+        this.attendances.at(index).get('attendance_state_id')?.setValue(1);
+        break;
+    }
   }
 
   editAttendance() {

@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-take-attendance',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './take-attendance.html',
   styleUrl: './take-attendance.css'
 })
@@ -93,6 +94,25 @@ export class TakeAttendance {
   }
   get attendances(): FormArray {
     return this.attendancesForm.controls.attendances;
+  }
+
+  /* Función para alternar el estado de asistencia de un estudiante */
+  toggleAttendanceState(index: number) {
+    const attendanceState = this.attendances.at(index).get('attendance_state_id');
+    switch (attendanceState?.value) {
+      case 0: // Marcar como presente cuando aún no tiene estado
+          this.attendances.at(index).get('attendance_state_id')?.setValue(1);
+        break;
+      case 1: // Marcar como media falta cuando está como presente
+          this.attendances.at(index).get('attendance_state_id')?.setValue(2);
+        break;
+      case 2: // Marcar como ausente cuando está como media falta
+          this.attendances.at(index).get('attendance_state_id')?.setValue(3);
+        break;
+      default:  // Marcar como presente en cualquier otro caso
+        this.attendances.at(index).get('attendance_state_id')?.setValue(1);
+        break;
+    }
   }
 
   /* Variable utilizada para determinar cuándo mostrar el mensaje de error "Falta tomar la asistencia de uno o más estudiantes" */
