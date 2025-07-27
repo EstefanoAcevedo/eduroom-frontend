@@ -1,1 +1,58 @@
-<p>teacher-dashboard works!</p>
+<nav class="row">
+    <div class="col-12 mb-3">
+        <div class="card h-100 rounded shadow">
+            <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                <h3 class="mt-0 mb-4 display-6 fw-bold">
+                    <svg _ngcontent-ng-c1961475563="" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill">
+                        <path _ngcontent-ng-c1961475563="" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path>
+                    </svg>
+                    Estudiantes
+                </h3>
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" placeholder="Buscar estudiante">
+                    <button type="submit" class="ms-3 button-accent">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/teacher/take-attendance" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Tomar asistencia</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para tomar su asistencia.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/teacher/edit-attendance" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Editar asistencia</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para editar la asistencia.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/teacher/attendance-list" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Lista de asistencias</h3>
+                    <p>Aquí puedes ver la lista de asistencias tomadas anteriormente.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/teacher/subjects" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Lista de asignaturas</h3>
+                    <p>Aquí puedes ver la lista de asignaturas disponibles para la carrera seleccionada.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+</nav>
