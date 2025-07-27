@@ -4,7 +4,7 @@
 </p>
 </h1>
 
-<p align="center">Una aplicación web para la gestión de aulas y asistencia educativa.</p>
+<p align="center">Una aplicación web para la gestión de inscripciones y asistencias educativas.</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Estado-En%20Desarrollo-yellow" alt="Estado" />
@@ -15,9 +15,9 @@
 
 ## 📋 Tabla de Contenidos
 
-- [Descripción General](#🧩-descripción-general)
-- [Instalación](#⚙️-instalación)
-- [Tecnologías Utilizadas](#🛠️-tecnologías-utilizadas)
+- [Descripción General](#descripción-general)
+- [Instalación](#instalación)
+- [Tecnologías Utilizadas](#tecnologías-utilizadas)
 
 ---
 
