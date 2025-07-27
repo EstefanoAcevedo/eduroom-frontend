@@ -1,59 +1,70 @@
-# EduRoom
+<h1 align="center">
+<p align="center">
+  <img src="public/EduRoom_logo_transparent.png" width="300px" style="filter: brightness(0) invert(1)" />
+</p>
+</h1>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.2.
+<p align="center">Una aplicación web para la gestión de aulas y asistencia educativa.</p>
 
-## Development server
+<p align="center">
+  <img src="https://img.shields.io/badge/Estado-En%20Desarrollo-yellow" alt="Estado" />
+  <img src="https://img.shields.io/badge/Lenguaje-TypeScript-blue" alt="Lenguaje" />
+</p>
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 📋 Tabla de Contenidos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Descripción General](#🧩-descripción-general)
+- [Instalación](#⚙️-instalación)
+- [Tecnologías Utilizadas](#🛠️-tecnologías-utilizadas)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🧩 Descripción General
 
-```bash
-ng generate component component-name
-```
+**EduRoom** es un sistema de gestión de inscripciones y asistencias desarrollado como una *Single Page Application* utilizando Angular en su versión 20.0.2. Integra Bootstrap para el diseño visual y Apache ECharts para la generación de gráficos dinámicos e interactivos. El proyecto está en desarrollo y está pensado para ser modular, escalable y fácil de mantener.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ⚙️ Instalación
 
-## Building
+### 🔸 Requisitos Previos
 
-To build the project run:
+- Tener instaladas las siguientes tecnologías:
+  - [Node.js](https://nodejs.org/)
+  - [Angular CLI](https://angular.io/cli)
+  - [Git](https://git-scm.com/)
+  - [Visual Studio Code](https://code.visualstudio.com/) (opcional, recomendado)
 
-```bash
-ng build
-```
+### 🔸 Instalación
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Clona el repositorio:
 
 ```bash
-ng e2e
+git clone https://github.com/tu-usuario/edu-room.git
+cd edu-room
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Instala las dependencias:
+```bash
+npm install
+```
 
-## Additional Resources
+Ejecuta el servidor y abre la aplicación:
+```bash
+ng s --o
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+## 🛠️ Tecnologías Utilizadas
+| Paquete         | Versión  | Descripción                           |
+| --------------- | -------- | ------------------------------------- |
+| `@angular/core` | ^20.0.0  | Framework base para la aplicación SPA |
+| `typescript`    | \~5.8.2  | Lenguaje principal del proyecto       |
+| `bootstrap`     | ^5.3.7   | Estilos responsivos y componentes UI  |
+| `echarts`       | ^5.6.0   | Apache ECharts para gráficos interactivos  |
+| `ngx-echarts`   | ^20.0.1  | Integración de ECharts con Angular    |
+| `rxjs`          | \~7.8.0  | Programación reactiva con Observables |
+| `@angular/cli`  | ^20.0.2  | Herramientas de desarrollo y build    |
