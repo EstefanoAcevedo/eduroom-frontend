@@ -17,6 +17,16 @@ export class TakeAttendance {
       {career_id: 1, career_name: 'Tecnicatura Superior en Análisis y Desarrollo de Software'},
       {career_id: 2, career_name: 'Tecnicatura Superior en Enfermería'},
       {career_id: 3, career_name: 'Profesorado de Educación Secundaria en Matemática'},
+    ];
+    this.subjects = [
+      {subject_id: 1, subject_name: 'Programación III', career_id: {career_alias: 'Software'}},
+      {subject_id: 2, subject_name: 'Probabilidad y Estadística', career_id: {career_alias: 'Software'}},
+      {subject_id: 3, subject_name: 'Práctica Profesionalizante III', career_id: {career_alias: 'Software'}},
+    ];
+    this.commissions = [
+      {commission_id: 1, commission_name: 'Primera división'},
+      {commission_id: 2, commission_name: 'Segunda división'},
+      {commission_id: 3, commission_name: 'Tercera división'},
     ]
   }
 
@@ -25,7 +35,7 @@ export class TakeAttendance {
 
   /* Variables tipo array que se utilizarán para rellenar los selects del selector de comisión, al principio son vacíos, su valor cambiará a medida que se selecciona una carrera, materia y comisión */
   careers: {career_id: number, career_name: string}[] = [];
-  subjects: {subject_id: number, subject_name: string, career_id: number} [] = [];
+  subjects: {subject_id: number, subject_name: string, career_id: {career_alias: string}} [] = [];
   commissions: {commission_id: number, commission_name: string} [] = [];
   enrollments: {enrollment_id: number, enrollment_academic_year: number, user_id: {user_lastname: string, user_name: string}} [] = [];
 
@@ -38,21 +48,11 @@ export class TakeAttendance {
 
   /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de carreras */
   onCareerChange() {
-    this.subjects = [
-      {subject_id: 1, subject_name: 'Programación III', career_id: 1},
-      {subject_id: 1, subject_name: 'Probabilidad y Estadística', career_id: 1},
-      {subject_id: 1, subject_name: 'Práctica Profesionalizante III', career_id: 1},
-    ]
     this.commissionForm.controls.subject.enable();
   }
 
     /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de asignaturas */
   onSubjectChange() {
-    this.commissions = [
-      {commission_id: 1, commission_name: 'Primera división'},
-      {commission_id: 2, commission_name: 'Segunda división'},
-      {commission_id: 3, commission_name: 'Tercera división'},
-    ]
     this.commissionForm.controls.commission.enable();
   }
 

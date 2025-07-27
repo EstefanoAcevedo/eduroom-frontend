@@ -49,7 +49,8 @@
                             'bg-danger': attendances.controls[$index].value.attendance_state_id === 3
                         }"
                         (click)="toggleAttendanceState($index)"   
-                        class="list-group-item">
+                        class="list-group-item"
+                        role="button">
                         @switch (attendances.controls[$index].value.attendance_state_id) {
                             @case (0) {
                                 <span class="badge text-bg-dark user-select-none">Sin estado</span>

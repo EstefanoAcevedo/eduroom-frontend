@@ -1,4 +1,84 @@
-<section class="bg-white border shadow-sm rounded p-4 mb-3">
-    <h3 class="mb-3">Panel de administración</h3>
-    <p>Bienvenido al panel de administración</p>
-</section>
+<div class="row">
+    <div class="col-12 mb-3 col-lg-6 col-xl-8">
+        <div class="card h-100 rounded shadow">
+            <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                <h3 class="mt-0 mb-4 display-6 fw-bold">
+                    <span class="badge text-bg-dark user-select-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                    </svg>11</span>
+                    Notificaciones
+                </h3>
+                <p>
+                    Solicitudes de registro pendientes
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mb-3 col-lg-6 col-xl-4">
+        <div class="card h-100 rounded shadow">
+            <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                <h3 class="mt-0 mb-4 display-6 fw-bold">
+                    <svg _ngcontent-ng-c1961475563="" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" viewBox="0 0 16 16" class="bi bi-people-fill"><path _ngcontent-ng-c1961475563="" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"></path></svg>
+                    Usuarios
+                </h3>
+                <form class="d-flex justify-content-between">
+                    <input type="text" class="form-control" placeholder="Buscar usuario">
+                    <button type="submit" class="ms-3 button-accent">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="row">
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/admin/take-attendance" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Tomar asistencia</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para tomar su asistencia.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/admin/edit-attendance" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Editar asistencia</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para editar la asistencia.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/admin/justify-absence" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Justificar asistencia</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para justificar la asistencia.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/admin/generate-reports" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Generar reporte</h3>
+                    <p>Aquí puedes seleccionar una comisión de cualquier asignatura y carrera para generar un reporte de asistencias.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+    <div class="col-12 mb-3 col-lg-6">
+        <a routerLink="/private/admin/absence-reports" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Ver reportes</h3>
+                    <p>Aquí ver los reportes de asistencias generados anteriormente.</p>
+                </div>  
+            </div>
+        </a>
+    </div>
+</nav>

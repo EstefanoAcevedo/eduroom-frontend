@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withViewTransitions } from '@angular/router';
 
 import { app_routes } from './app.routes';
 import { admin_routes } from './features/admin/admin.routes';
@@ -11,10 +11,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(app_routes),
-    provideRouter(auth_routes),
-    provideRouter(admin_routes),
-    provideRouter(student_routes),
-    provideRouter(teacher_routes),
+    provideRouter(app_routes, withViewTransitions()),
+    provideRouter(auth_routes, withViewTransitions()),
+    provideRouter(admin_routes, withViewTransitions()),
+    provideRouter(student_routes, withViewTransitions()),
+    provideRouter(teacher_routes, withViewTransitions()),
   ]
 };
