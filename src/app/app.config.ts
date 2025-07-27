@@ -6,6 +6,7 @@ import { admin_routes } from './features/admin/admin.routes';
 import { auth_routes } from './features/auth/auth.routes';
 import { student_routes } from './features/student/student.routes';
 import { teacher_routes } from './features/teacher/teacher.routes';
+import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,5 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(admin_routes, withViewTransitions()),
     provideRouter(student_routes, withViewTransitions()),
     provideRouter(teacher_routes, withViewTransitions()),
+    {
+      provide: NGX_ECHARTS_CONFIG,
+      useValue: {
+        echarts: () => import('echarts')
+      }
+    }
   ]
 };
