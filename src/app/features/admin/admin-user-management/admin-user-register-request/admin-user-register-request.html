@@ -4,28 +4,18 @@
         <table class="table table-bordered table-striped align-middle">
             <thead class="table-dark text-center">
                 <tr>
-                    <th scope="col">Documento</th>
-                    <th scope="col">Correo electrónico</th>
-                    <th scope="col">Apellido</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Domicilio</th>
-                    <th scope="col">Localidad</th>
-                    <th scope="col">Rol</th>
+                    <th scope="col">Estudiante</th>
+                    <th scope="col">Asignatura</th>
+                    <th scope="col">Comisión</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                @for (user of users; track $index) {
+                @for (enrollment of enrollments; track $index) {
                     <tr>
-                        <td>{{user.user_cuil}}</td>
-                        <td>{{user.user_mail}}</td>
-                        <td>{{user.user_lastname}}</td>
-                        <td>{{user.user_name}}</td>
-                        <td>{{user.user_tel}}</td>
-                        <td>{{user.user_address}}</td>
-                        <td>{{user.location_id.location_name}}, {{user.location_id.province_id.province_name}}. {{user.location_id.province_id.country_id.country_name}}</td>
-                        <td>{{user.rol_id.rol_name}}</td>
+                        <td>{{enrollment.user.lastname}}, {{enrollment.user.name}} </td>
+                        <td>{{enrollment.subject.subject_name}}</td>
+                        <td>{{enrollment.commission.commission_name}}</td>
                         <td>
                             <div class="d-flex justify-content-evenly h-100">
                                 <button class="btn btn-success m-1 flex-grow-1">

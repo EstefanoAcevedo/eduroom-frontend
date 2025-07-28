@@ -8,6 +8,7 @@ import { AdminGenerateReports } from './admin-reports/admin-generate-reports/adm
 import { AdminTakeAttendance } from './admin-take-attendance/admin-take-attendance';
 import { AdminUserListTable } from './admin-user-management/admin-user-list-table/admin-user-list-table';
 import { AdminUserRegisterRequest } from './admin-user-management/admin-user-register-request/admin-user-register-request';
+import { AdminSubjects } from './admin-subjects/admin-subjects';
 
 export const admin_routes: Routes = [
     { path: 'attendance-overview', component: AdminAttendanceOverview },
@@ -19,6 +20,7 @@ export const admin_routes: Routes = [
     { path: 'take-attendance', component: AdminTakeAttendance },
     { path: 'user-list-table', component: AdminUserListTable },
     { path: 'user-register-request', component: AdminUserRegisterRequest },
+    { path: 'subjects', component: AdminSubjects },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
