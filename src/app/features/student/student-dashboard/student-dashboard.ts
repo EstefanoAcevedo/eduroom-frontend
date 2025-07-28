@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-dashboard',
   standalone: true, // clave en Angular 20
-  imports: [CommonModule], // necesario para *ngFor, *ngIf, etc.
+  imports: [CommonModule, RouterLink], // necesario para *ngFor, *ngIf, etc.
   templateUrl: './student-dashboard.html',
   styleUrls: ['./student-dashboard.css']
 })

@@ -1,74 +1,72 @@
-<div class="container-fluid mt-4">
-    <div class="row">
-
-        <!-- Panel lateral izquierdo -->
-        <div class="col-md-3 mb-3">
-            <div class="list-group shadow-sm">
-                <div class="list-group-item active" aria-current="true">
-                    Panel del Estudiante
-                </div>
-                <a class="list-group-item list-group-item-action" routerLink="/student-dashboard"
-                    routerLinkActive="active">
-                    Inicio
-                </a>
-                <a class="list-group-item list-group-item-action" routerLink="/student-subjects"
-                    routerLinkActive="active">
-                    Mis Materias
-                </a>
-                <a class="list-group-item list-group-item-action" routerLink="/student-attendance-history"
-                    routerLinkActive="active">
-                    Asistencias
-                </a>
+<!-- Row principal con resumen + notificaciones -->
+<div class="row">
+    <!-- Notificaciones -->
+    <div class="col-12 mb-3 col-lg-6 col-xl-8">
+        <div class="card h-100 rounded shadow">
+            <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                <h3 class="mt-0 mb-4 display-6 fw-bold">
+                    <span class="badge text-bg-dark user-select-none">
+                        <i class="bi bi-bell-fill fs-4"></i> 3
+                    </span>
+                    Notificaciones
+                </h3>
+                <ul class="mb-0">
+                    <li>📅 Tenés un examen el 5 de agosto.</li>
+                    <li>⚠️ Faltaste a Clases de Matemática el martes.</li>
+                    <li>✅ Tu justificación fue aprobada.</li>
+                </ul>
             </div>
         </div>
+    </div>
 
-        <!-- Contenido principal -->
-        <div class="col-md-9">
-            <h2 class="mb-4">Bienvenido, {{ estudiante?.nombre }}</h2>
-
-            <div class="row">
-                <!-- Asistencia reciente -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Asistencia reciente</h5>
-                            <p class="card-text">
-                                Tu última asistencia fue el <strong>{{ ultimaAsistencia?.fecha }}</strong> en
-                                <strong>{{ ultimaAsistencia?.materia }}</strong>.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Materias activas -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Materias activas</h5>
-                            <ul class="list-group list-group-flush">
-                                <li *ngFor="let materia of materiasActivas" class="list-group-item">
-                                    {{ materia.nombre }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Notificaciones -->
-                <div class="col-md-4 mb-3">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title">Notificaciones</h5>
-                            <ul class="list-group list-group-flush">
-                                <li *ngFor="let notif of notificaciones" class="list-group-item">
-                                    {{ notif.mensaje }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+    <!-- Resumen de progreso -->
+    <div class="col-12 mb-3 col-lg-6 col-xl-4">
+        <div class="card h-100 rounded shadow background-secondary">
+            <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                <h3 class="mt-0 mb-4 display-6 fw-bold">
+                    <i class="bi bi-graph-up fs-3 me-2"></i>
+                    Mi progreso
+                </h3>
+                <p>Materias inscritas: <strong>6</strong></p>
+                <p>Asistencia general: <strong>92%</strong></p>
+                <p>Faltas este mes: <strong>1</strong></p>
             </div>
         </div>
-
     </div>
 </div>
+
+<!-- Accesos rápidos -->
+<nav class="row">
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/student/subjects" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Mis materias</h3>
+                    <p>Consultá tus materias activas, profesores y horarios.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/student/attendance-history" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Mis asistencias</h3>
+                    <p>Visualizá tu historial de asistencias por materia.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 mb-3 col-lg-4">
+        <a routerLink="/private/student/justify-absence" class="text-decoration-none">
+            <div class="card dashboard-btn h-100 rounded shadow">
+                <div class="d-flex flex-column h-100 p-3 p-sm-5 pb-sm-3">
+                    <h3 class="mt-0 mb-4 display-6 fw-bold">Justificar faltas</h3>
+                    <p>Enviá tus justificativos por inasistencia desde aquí.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</nav>

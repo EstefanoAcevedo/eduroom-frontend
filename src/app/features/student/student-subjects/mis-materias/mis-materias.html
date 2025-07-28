@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Mis Materias</h2>
+
+    <div *ngIf="subjects.length > 0; else sinMaterias">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <div class="col" *ngFor="let materia of subjects">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">{{ materia.nombre }}</h5>
+                        <p class="card-text">
+                            <strong>Comisión:</strong> {{ materia.comision }}<br>
+                            <strong>Docente:</strong> {{ materia.docente }}
+                        </p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-end small text-muted">
+                        Información actualizada
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #sinMaterias>
+        <div class="alert alert-info text-center">No estás inscrito en ninguna materia actualmente.</div>
+    </ng-template>
+</div>

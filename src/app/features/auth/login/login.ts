@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { RouterLink ,Router } from "@angular/router";
+import { RouterLink, Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -28,17 +28,15 @@ export class Login {
   onSubmit() {
     this.submitted = true;
 
-    if (this.loginForm.invalid) {
-      return;
-    }
+    if (this.loginForm.invalid) return;
 
     const { cuil, password } = this.loginForm.value;
 
-    if (cuil === "20123456789" && password === "123456") {
-      this.router.navigate(["/student"]);
-    } else {
-      // Ejemplo simple de feedback si el usuario no coincide
-      alert("CUIL o contraseña incorrectos");
+    // Ejemplo de login ficticio
+    if (cuil === '20123456789' && password === '123456') {
+      // Si el usuario es estudiante, redirige a su panel
+      this.router.navigate(['/private/student/dashboard']);
     }
   }
+
 }

@@ -1,1 +1,50 @@
-<p>student-attendance-history works!</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Historial de Asistencias</h2>
+
+    <!-- Filtros -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <label class="form-label">Materia</label>
+            <select class="form-select" [(ngModel)]="filtroMateria" (change)="filtrar()">
+                <option value="">Todas</option>
+                <option *ngFor="let m of materiasUnicas" [value]="m">{{ m }}</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Desde</label>
+            <input type="date" class="form-control" [(ngModel)]="filtroDesde" (change)="filtrar()">
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Hasta</label>
+            <input type="date" class="form-control" [(ngModel)]="filtroHasta" (change)="filtrar()">
+        </div>
+    </div>
+
+    <!-- Tabla de resultados -->
+    <div *ngIf="attendancesFiltradas.length > 0; else sinAsistencias">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Materia</th>
+                        <th>Comisión</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let a of attendancesFiltradas">
+                        <td>{{ a.fecha }}</td>
+                        <td>{{ a.materia }}</td>
+                        <td>{{ a.comision }}</td>
+                        <td>{{ a.estado }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <ng-template #sinAsistencias>
+        <div class="alert alert-warning mt-3">No se encontraron asistencias con los filtros aplicados.</div>
+    </ng-template>
+</div>
