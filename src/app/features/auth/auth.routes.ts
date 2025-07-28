@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { Login } from './login/login';
-import { PasswordRecovery } from './password-recovery/password-recovery';
+import { PasswordRecovery } from './password-recovery/password-recovery'
 import { Register } from './register/register';
 
 export const auth_routes: Routes = [
