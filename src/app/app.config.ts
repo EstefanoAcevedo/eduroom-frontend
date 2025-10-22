@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 import { app_routes } from './app.routes';
 import { admin_routes } from './features/admin/admin.routes';
@@ -10,6 +11,7 @@ import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideHttpClient(),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(app_routes, withViewTransitions()),

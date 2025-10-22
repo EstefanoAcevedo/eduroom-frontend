@@ -1,6 +1,6 @@
 <main class="vh-100 background-secondary">
     <div class="container-fluid p-3 p-sm-5 background-secondary">
-        <div class="container bg-white rounded-4">
+        <div class="container bg-white rounded-4 shadow-sm">
             <div class="row pt-5 justify-content-center">
                 <div class="col text-center">
                     <img src="EduRoom_logo_transparent.png" height="250" width="250" alt="Logo EduRoom">
@@ -60,9 +60,24 @@
                             }
                         </div>
                         <div class="col-12 col-md-6">
+                            <select (change)="onProvinceChange()" class="form-select" formControlName="province">
+                                <option value="" disabled>Seleccione una provincia</option>
+                                @for (province of provinces; track $index) {
+                                    <option value="{{province.id}}">{{province.nombre}}</option>
+                                }
+                            </select>
+                            @if (province.invalid && (province.dirty || province.touched)) {
+                                @if (province.hasError("required")) {
+                                    <p class="d-block text-danger">Seleccione una provincia</p>
+                                }
+                            }
+                        </div>
+                        <div class="col-12 col-md-6">
                             <select class="form-select" formControlName="location">
-                                <option selected>Localidades</option>
-                                <!-- Opciones -->
+                                <option value="" disabled>Seleccione una localidad</option>
+                                @for (location of locations; track $index) {
+                                    <option value="{{location.id}}">{{location.nombre}}</option>
+                                }
                             </select>
                             @if (location.invalid && (location.dirty || location.touched)) {
                                 @if (location.hasError("required")) {
@@ -99,17 +114,6 @@
                             }
                         </div>
                         <div class="col-12 col-md-6">
-                            <select class="form-select" formControlName="rol">
-                                <option selected>Rol</option>
-                                <!-- Opciones -->
-                            </select>
-                            @if (rol.invalid && (rol.dirty || rol.touched)) {
-                                @if (rol.hasError("required")) {
-                                    <p class="text-danger">Seleccione un rol</p>
-                                }
-                            }
-                        </div>
-                        <div class="col-12 col-md-6">
                             <input class="form-control" type="password" placeholder="Contraseña" formControlName="password">
                             @if (password.invalid && (password.dirty || password.touched)) {
                                 @if (password.hasError("required")) {
@@ -131,6 +135,19 @@
                                 }
                                 @if (matchPassword.hasError("passwordMismatch")) {
                                     <p class="text-danger">La contraseña no coincide</p>
+                                }
+                            }
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <select class="form-select" formControlName="rol">
+                                <option value="" disabled>Seleccione un rol</option>
+                                @for (rol of roles; track $index) {
+                                    <option value="{{rol.name}}">{{rol.name}}</option>
+                                }
+                            </select>
+                            @if (rol.invalid && (rol.dirty || rol.touched)) {
+                                @if (rol.hasError("required")) {
+                                    <p class="text-danger">Seleccione un rol</p>
                                 }
                             }
                         </div>
