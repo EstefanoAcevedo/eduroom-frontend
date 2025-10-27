@@ -13,6 +13,7 @@
     --accent-color-90: rgba(109, 43, 189, 0.9);
     --accent-color-2-90: rgba(249, 218, 37, 0.9);
 }
+
 /* CSS VARIABLES ENDS */
 
 /* BACKGROUND */
@@ -40,6 +41,7 @@
     background-color: var(--accent-color-2);
     color: var(--text-color-dark);
 }
+
 /* END BACKGROUND */
 
 /* BUTTONS */
@@ -78,6 +80,7 @@
 .button-accent2:active {
     background-color: var(--accent-color-2);
 }
+
 /* BUTTONS ENDS */
 
 /* BORDERS */
@@ -92,6 +95,7 @@
 .b-accent2 {
     border-color: var(--accent-color-2) !important;
 }
+
 /* BORDERS ENDS */
 
 /* A */
@@ -104,6 +108,7 @@
     color: var(--accent-color);
     text-decoration: underline;
 }
+
 /* A ENDS */
 
 /* ANGULAR STYLES */
@@ -111,7 +116,7 @@
     border: 2px solid #42A948;
 }
 
-.ng-invalid:not(form):not(ul):not(li).ng-touched  {
+.ng-invalid:not(form):not(ul):not(li).ng-touched {
     border: 2px solid #a94442;
 }
 
@@ -122,4 +127,5 @@
 .form-select {
     border: 2px solid var(--secondary-color);
 }
+
 /* ANGULAR STYLES ENDS */
