@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { LocationsService } from '../../../core/services/locations/locations-service';
@@ -6,10 +6,11 @@ import { RolesService } from '../../../core/services/roles/roles-service';
 import { RegisterRequestInterface } from '../../../core/models/auth/register-request-interface';
 import { RolInterface } from '../../../core/models/roles/rol-interface';
 import { AuthService } from '../../../core/services/auth/auth-service';
+import { NotificationToast } from '../../../shared/components/notifications/notification-toast/notification-toast';
 
 @Component({
   selector: 'app-register',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [RouterLink, ReactiveFormsModule, NotificationToast],
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
@@ -98,8 +99,12 @@ export class Register {
     }
   }
 
+  @ViewChild(NotificationToast) notificationToast!: NotificationToast;
   registerUser() {
     if (this.registerForm.valid) {
+      this.notificationToast.show({
+        status: 'loading'
+      });
       const provinceName = this.provinces.find(province => province.id === this.province.value).nombre;
       const locationName = this.locations.find(location => location.id === this.location.value).nombre;
       const registerRequest: RegisterRequestInterface = {
@@ -115,11 +120,18 @@ export class Register {
       }
       this.authService.register(registerRequest).subscribe({
         next: (response) => {
-          /* this.router.navigate(['/login']) */
-          console.log(response);
+          this.notificationToast.show({
+            title: 'Éxito',
+            message: `${response.message}, ya puede iniciar sesión con sus credenciales`,
+            status: 'success'
+          });
         },
         error: (error) => {
-          console.log("No se pudo registrar al usuario", error);
+          this.notificationToast.show({
+            title: 'Error al registrar usuario',
+            message: error.error.message,
+            status: 'error'
+          })
         }
       })
     } else {

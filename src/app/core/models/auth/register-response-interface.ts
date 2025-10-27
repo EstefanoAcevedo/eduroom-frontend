@@ -5,4 +5,5 @@ export interface RegisterResponseInterface {
     access_token: string;
     token_type: string;
     user: UserInterface;
+    errors?: string;
 }
