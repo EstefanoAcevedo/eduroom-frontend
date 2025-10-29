@@ -69,9 +69,9 @@ export class Login {
 
         if (has('admin')) {
           this.router.navigate(['/private/admin/dashboard'], { replaceUrl: true });
-        } else if (has('docente') || has('teacher')) {
+        } else if (has('teacher')) {
           this.router.navigate(['/private/teacher/dashboard'], { replaceUrl: true });
-        } else if (has('estudiante') || has('student')) {
+        } else if (has('student')) {
           this.router.navigate(['/private/student/dashboard'], { replaceUrl: true });
         } else {
           // fallback genérico si no hay rol conocido
