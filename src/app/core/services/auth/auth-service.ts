@@ -6,6 +6,7 @@ import { RegisterResponseInterface } from '../../models/auth/register-response-i
 import { environment } from '../../../../enviroments/enviroment';
 import { LoginRequestInterface } from '../../models/auth/login-request-interface';
 import { LoginResponseInterface } from '../../models/auth/login-response-interface';
+import { LogoutResponseInterface } from '../../models/auth/logout-response-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class AuthService {
 
   login(request: LoginRequestInterface): Observable<LoginResponseInterface> {
     return this.http.post<LoginResponseInterface>(`${environment.apiUrl}login`, request);
+  }
+
+  logout(request: any): Observable<LogoutResponseInterface> {
+    return this.http.post<LogoutResponseInterface>(`${environment.apiUrl}logout`, request);
   }
 
 }
