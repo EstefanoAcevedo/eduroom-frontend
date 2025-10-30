@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { app_routes } from './app.routes';
 import { admin_routes } from './features/admin/admin.routes';
@@ -8,10 +8,11 @@ import { auth_routes } from './features/auth/auth.routes';
 import { student_routes } from './features/student/student.routes';
 import { teacher_routes } from './features/teacher/teacher.routes';
 import { NGX_ECHARTS_CONFIG } from 'ngx-echarts';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(app_routes, withViewTransitions()),
