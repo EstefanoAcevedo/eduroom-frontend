@@ -16,11 +16,12 @@ export class Sidebar {
   private router = inject(Router);
   @ViewChild(NotificationToast) notificationToast!: NotificationToast;
 
+  userName: string = '';
   userRol: string = '';
   
   ngOnInit() {
+    this.userName = sessionStorage.getItem('user_name') || '';
     this.userRol = sessionStorage.getItem('roles') || '';
-    console.log(this.userRol);
   }
 
   logout() {
