@@ -55,7 +55,7 @@
                         <select (change)="onProvinceChange()" class="form-select" formControlName="province">
                             <option value="" disabled>Seleccione una provincia</option>
                             @for (province of provinces; track $index) {
-                                <option value="{{province.id}}">{{province.nombre}}</option>
+                                <option class="option" value="{{province.id}}">{{province.nombre}}</option>
                             }
                         </select>
                         @if (province.invalid && (province.dirty || province.touched)) {
@@ -69,7 +69,7 @@
                         <select class="form-select" formControlName="location">
                             <option value="" disabled>Seleccione una localidad</option>
                             @for (location of locations; track $index) {
-                                <option value="{{location.id}}">{{location.nombre}}</option>
+                                <option class="option" value="{{location.id}}">{{location.nombre}}</option>
                             }
                         </select>
                         @if (location.invalid && (location.dirty || location.touched)) {
@@ -126,7 +126,7 @@
                         <select class="form-select" formControlName="rol">
                             <option value="" disabled>Seleccione un rol</option>
                             @for (rol of roles; track $index) {
-                                <option value="{{rol.name}}">{{rol.name}}</option>
+                                <option class="option" value="{{rol.name}}">{{rol.name}}</option>
                             }
                         </select>
                         @if (rol.invalid && (rol.dirty || rol.touched)) {

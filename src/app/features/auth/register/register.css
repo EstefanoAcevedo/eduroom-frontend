@@ -53,9 +53,8 @@
 }
 
 /* Opción visible */
-.register-bg .form-select option {
+.option {
     color: #000;
-    background: #fff;
 }
 
 /* Placeholder blanco */
