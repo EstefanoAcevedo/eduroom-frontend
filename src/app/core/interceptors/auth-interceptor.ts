@@ -23,6 +23,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const publicEndpoints = [
     '/login',
     '/register',
+    '/roles',
   ];
 
   const isPublicEndpoint = publicEndpoints.some(endpoint =>
