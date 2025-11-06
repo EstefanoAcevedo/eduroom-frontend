@@ -1,17 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
+import { EnrollmentInterface } from '../../../../core/models/enrollments/enrollment-interface';
+import { EnrollmentsServices } from '../../../../core/services/enrollments/enrollments-services';
+import { NotificationToast } from '../../../../shared/components/notifications/notification-toast/notification-toast';
 
 @Component({
   selector: 'app-admin-user-register-request',
-  imports: [],
+  imports: [NotificationToast],
   templateUrl: './admin-user-register-request.html',
   styleUrl: './admin-user-register-request.css'
 })
 export class AdminUserRegisterRequest {
 
-  enrollments = [
-    {enrollment_id: 1, user: {name: 'Estéfano Marcial', lastname: 'Acevedo'}, subject_id: 1, subject: {subject_name: 'Programación III'}, commission_id: 1, commission: {commission_name: 'Primera división'}},
-    {enrollment_id: 2, user: {name: 'Adrián Alejandro', lastname: 'Bracamonte'}, subject_id: 2, subject: {subject_name: 'Probabilidad y Estadística'}, commission_id: 1, commission: {commission_name: 'Primera división'}},
-    {enrollment_id: 3, user: {name: 'Brian', lastname: 'Vanegas'}, subject_id: 3, subject: {subject_name: 'Base de Datos'}, commission_id: 1, commission: {commission_name: 'Primera división'}},
-  ];
+  private enrollmentsService = inject(EnrollmentsServices);
+  @ViewChild(NotificationToast) notificationToast!: NotificationToast;
+
+  ngOnInit() {
+    this.getPendingEnrollments();
+  }
+
+  enrollments: EnrollmentInterface[] = [];
+
+  getPendingEnrollments() {
+    this.enrollmentsService.getPendingEnrollments().subscribe({
+      next: (response) => {
+        this.enrollments = response;
+      },
+      error: (error) => {
+        console.error('Error al obtener las inscripciones pendientes', error)
+      }
+    })
+  }
+
+  approveEnrollment(enrollment: EnrollmentInterface) {
+    enrollment.isLoading = true;
+    enrollment.enrollment_status = 'approved';
+    this.enrollmentsService.updateEnrollment(enrollment).subscribe({
+      next: (response) => {
+        enrollment.isLoading = false;
+        enrollment.isApproved = true;
+      },
+      error: (error) => {
+        this.notificationToast.show({
+          status: 'error',
+          title: 'Error',
+          message: 'Ocurrió un error al intentar aprobar la inscripción. Por favor, intente nuevamente más tarde.'
+        })
+        enrollment.isLoading = false;
+      }
+    })
+  }
+
+  rejectEnrollment(enrollment: EnrollmentInterface) {
+    enrollment.isLoading = true;
+    enrollment.enrollment_status = 'rejected';
+    this.enrollmentsService.updateEnrollment(enrollment).subscribe({
+      next: (response) => {
+        enrollment.isLoading = false;
+        enrollment.isRejected = true;
+      },
+      error: (error) => {
+        this.notificationToast.show({
+          status: 'error',
+          title: 'Error',
+          message: 'Ocurrió un error al intentar rechazar la inscripción'
+        })
+        enrollment.isLoading = false;
+      }
+    })
+  }
 
 }
