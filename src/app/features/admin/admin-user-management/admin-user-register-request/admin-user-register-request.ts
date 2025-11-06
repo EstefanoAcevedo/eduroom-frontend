@@ -19,14 +19,21 @@ export class AdminUserRegisterRequest {
   }
 
   enrollments: EnrollmentInterface[] = [];
+  isLoading: boolean = true;
+  isError: boolean = false;
 
   getPendingEnrollments() {
+    this.isError = false;
+    this.isLoading = true;
     this.enrollmentsService.getPendingEnrollments().subscribe({
       next: (response) => {
-        this.enrollments = response;
+        this.enrollments = response ?? [];
+        this.isLoading = false;
       },
       error: (error) => {
         console.error('Error al obtener las inscripciones pendientes', error)
+        this.isLoading = false;
+        this.isError = true;
       }
     })
   }
