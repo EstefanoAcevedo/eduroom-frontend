@@ -15,4 +15,8 @@ export class CareersService {
     return this.http.get<CareerInterface[]>(`${environment.apiUrl}careers`);
   }
 
+  getCareersWithSubjects(): Observable<CareerInterface[]> {
+    return this.http.get<CareerInterface[]>(`${environment.apiUrl}careers-with-subjects`);
+  }
+
 }

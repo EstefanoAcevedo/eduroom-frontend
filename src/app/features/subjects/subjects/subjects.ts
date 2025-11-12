@@ -18,7 +18,7 @@ export class Subjects {
   private subjectsService = inject(SubjectsService);
 
   ngOnInit() {
-    this.getCareers();
+    this.getCareersWithSubjects();
   }
 
   isError: boolean = false;
@@ -32,15 +32,9 @@ export class Subjects {
     career: ['0', Validators.compose([Validators.required, Validators.min(1)])],
   })
 
-  /* Función a invocar cuando el usuario cambia el valor seleccionado en el select de carreras */
-  onCareerSelected(careerId: number) {
-    this.getSubjectsByCareerId(careerId);
-    this.isCareerMode = false;
-  }
-
-  getCareers() {
+  getCareersWithSubjects() {
     this.isLoading = true;
-    this.careersService.getCareers().subscribe({
+    this.careersService.getCareersWithSubjects().subscribe({
       next: (response => {
         this.careers = response;
         this.isLoading = false;
@@ -53,19 +47,9 @@ export class Subjects {
     })
   }
 
-  getSubjectsByCareerId(careerId: number) {
-    this.isLoading = true;
-    this.subjectsService.getSubjectsByCareerId(careerId).subscribe({
-      next: (response => {
-        this.subjects = response;
-        this.isLoading = false;
-      }),
-      error: (error => {
-        console.error('Error al obtener las asignaturas', error)
-        this.isLoading = false;
-        this.isError = true;
-      })
-    })
+  getSubjectsByCareerIndex(index: number) {
+    this.isCareerMode = false;
+    this.subjects = this.careers[index].subjects || [];
   }
 
 }
