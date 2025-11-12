@@ -12,7 +12,7 @@ export interface MySubjectApi {
     commission_name: string;
 }
 
-export interface StudenSubjectView {
+export interface StudentSubjectView {
     nombre: string;
     comision: string;
     docente: string;
@@ -26,7 +26,7 @@ export class SubjectApiService {
 
     constructor() { }
 
-    getMySubjects(): Observable<StudenSubjectView[]> {
+    getMySubjects(): Observable<StudentSubjectView[]> {
         return this.http
             .get<MySubjectApi[]>(`${environment.apiUrl}my-subjects`)
             .pipe(
@@ -39,7 +39,7 @@ export class SubjectApiService {
                 ));
     }
 }
-export class SubjectsService {
+/*export class SubjectsService {
     constructor() { }
 
     getSubjects() {
@@ -52,3 +52,4 @@ export class SubjectsService {
         ];
     }
 }
+*/
