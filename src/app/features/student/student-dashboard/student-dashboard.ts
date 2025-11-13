@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { SubjectsService } from '../subjects.service'; // Asegurate que la ruta sea correcta
+/* import { SubjectsService } from '../subjects.service'; */ // Asegurate que la ruta sea correcta
 
 @Component({
   selector: 'app-student-dashboard',
@@ -17,7 +17,7 @@ export class StudentDashboard implements OnInit {
   materiasActivas: any[] = [];
   notificaciones: any[] = [];
 
-  constructor(private subjectsService: SubjectsService) { }
+/*   constructor(private subjectsService: SubjectsService) { } */
 
   ngOnInit(): void {
     this.estudiante = {
@@ -30,7 +30,7 @@ export class StudentDashboard implements OnInit {
     };
 
     // 🟢 Obtenemos las materias reales desde el servicio
-    this.materiasActivas = this.subjectsService.getSubjects();
+/*     this.materiasActivas = this.subjectsService.getSubjects(); */
 
     this.notificaciones = [
       { id: 1, mensaje: 'Falta registrada el 25/06' },

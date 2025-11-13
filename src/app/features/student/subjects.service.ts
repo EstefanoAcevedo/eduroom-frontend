@@ -3,8 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../enviroments/enviroment';
 
-
-
 export interface MySubjectApi {
     subject_id: number;
     subject_name: string;
