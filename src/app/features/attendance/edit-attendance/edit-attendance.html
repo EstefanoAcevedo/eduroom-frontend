@@ -1,5 +1,5 @@
 <section class="bg-white border shadow-sm rounded p-4 mb-3">
-    <h3 class="mb-3">Asistencias previas</h3>
+    <h3 class="mb-3">Editar asistencia</h3>
     @if (isLoading) {
         <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status"></div>
@@ -59,7 +59,7 @@
         } @else {
             <form [formGroup]="attendancesForm">
                 <div class="mb-3">
-                    <h3>Editar asistencia</h3>
+                    <h3>Estudiantes</h3>
                 </div>
                 <ul formArrayName="attendances" class="list-group">
                     @for (attendance of previousAttendances; track $index) {

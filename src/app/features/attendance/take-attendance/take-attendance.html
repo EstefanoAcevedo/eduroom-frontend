@@ -1,5 +1,5 @@
 <section class="bg-white border shadow-sm rounded p-4 mb-3">
-    <h3 class="mb-3">Asistencias</h3>
+    <h3 class="mb-3">Tomar asistencia</h3>
     @if (isLoading) {
         <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status"></div>
@@ -44,7 +44,7 @@
     <section class="bg-white border shadow-sm rounded p-4 mb-3">
         <form [formGroup]="attendancesForm">
             <div class="d-flex flex-wrap justify-content-between mb-4">
-                <h3>Tomar asistencia</h3>
+                <h3>Estudiantes</h3>
                 <div class="d-flex align-items-center">
                     <label class="form-label me-2 mb-0">Fecha</label>
                     <input formControlName="attendance_date" class="form-control" type="date">
