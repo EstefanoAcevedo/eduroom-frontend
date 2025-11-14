@@ -156,7 +156,6 @@ export class TakeAttendance {
       this.isAttendancesInvalid = false;
       this.attendancesService.storeMultipleAttendances(this.storeMultipleAttendancesRequest).subscribe({
         next: (response) => {
-          console.log(this.attendancesForm.value)
           this.storeMultipleAttendancesResponse = response;
           this.notificationToast.show({
             status: 'success',
@@ -165,8 +164,8 @@ export class TakeAttendance {
           });
           this.isCommissionSelected = false;
           this.newAttendanceForm();
+          this.commissionForm.controls.commission.reset();
           this.commissionForm.controls.commission.setValue(0);
-          console.log(this.attendancesForm.value);
         },
         error: (error) => {
           this.storeMultipleAttendancesResponse = error;
