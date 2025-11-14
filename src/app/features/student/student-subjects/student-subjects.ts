@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { StudentSubjectView, SubjectApiService } from '../subjects.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { MisMateriasComponent } from './mis-materias/mis-materias';
 import { CommonModule } from '@angular/common';
-
+import { SubjectsService } from '../../../core/services/subjects/subjects-service';
+import { StudentSubjectView } from '../../../core/services/subjects/student-subject-view';
 @Component({
   selector: 'app-student-subjects',
   standalone: true,
@@ -10,21 +10,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './student-subjects.html',
   styleUrls: ['./student-subjects.css']
 })
-//export class StudentSubjects {
-// subjects: any[] = [];
 
-// constructor(private subjectsService: SubjectsService) {
-//   this.subjects = this.subjectsService.getSubjects();
-// }
-//}
 
 export class StudentSubjects implements OnInit {
+
+  private subjectsService = inject(SubjectsService);
 
   subjects: StudentSubjectView[] = [];
   isLoading = false;
   hasError = false;
 
-  constructor(private subjectsService: SubjectApiService) { }
 
   ngOnInit(): void {
     this.loadSubjects();

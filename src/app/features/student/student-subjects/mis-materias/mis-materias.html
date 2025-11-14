@@ -24,16 +24,5 @@
         <div class="alert alert-info text-center">No estás inscrito en ninguna materia actualmente.</div>
     </ng-template>
 
-    <div class="container mt-4">
-        <div *ngIf="isLoading" class="alert alert-info text-center">
-            Cargando tus materias...
-        </div>
-
-        <div *ngIf="hasError" class="alert alert-danger text-center">
-            Ocurrió un error al cargar tus materias. Intenta más tarde.
-        </div>
-    </div>
-
-    <app-mis-materias [subjects]="subjects"></app-mis-materias>
 
 </div>
