@@ -1,85 +1,107 @@
 <section class="bg-white border shadow-sm rounded p-4 mb-3">
-    <h3 class="mb-3">Asistencias previas</h3>
-    <form [formGroup]="commissionForm" class="row g-3">
-        <div class="col-12 col-sm-6 col-xl-3">
-            <label class="form-label">Carrera</label>
-            <select formControlName="career" (change)="onCareerChange()" class="form-select">
-                <option value="0" selected disabled>Seleccione una carrera</option>
-                @for (career of careers; track $index) {
-                    <option value="{{career.career_id}}">{{career.career_name}}</option>
-                }
-            </select>
+    <h3 class="mb-3">Editar asistencia</h3>
+    @if (isLoading) {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status"></div>
         </div>
-        <div class="col-12 col-sm-6 col-xl-3">
-            <label class="form-label">Asignatura</label>
-            <select formControlName="subject" (change)="onSubjectChange()" class="form-select">
-                <option value="0" selected disabled>Seleccione una asignatura</option>
-                @for (subject of subjects; track $index) {
-                    <option value="{{subject.subject_id}}">{{subject.subject_name}}</option>
-                }
-            </select>
+    } @else if (isError) {
+        <div class="alert alert-danger mb-0" role="alert">
+            Error al cargar las carreras. Por favor, intente nuevamente más tarde.
         </div>
-        <div class="col-12 col-sm-6 col-xl-3">
-            <label class="form-label">Comisión</label>
-            <select formControlName="commission" (change)="onCommissionChange()" class="form-select">
-                <option value="0" selected disabled>Seleccione una comisión</option>
-                @for (commission of commissions; track $index) {
-                    <option value="{{commission.commission_id}}">{{commission.commission_name}}</option>
-                }
-            </select>
-        </div>
-        <div class="col-12 col-sm-6 col-xl-3">
-            <label class="form-label">Fecha</label>
-            <input formControlName="attendance_date" (change)="onAttendanceDateChange()" class="form-control" type="date">
-        </div>
-    </form>
+    } @else {
+        <form [formGroup]="commissionForm" class="row g-3">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <label class="form-label">Carrera</label>
+                <select formControlName="career" (change)="onCareerChange()" class="form-select">
+                    <option value="0" selected disabled>Seleccione una carrera</option>
+                    @for (career of careers; track $index) {
+                        <option value="{{career.career_id}}">{{career.career_name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <label class="form-label">Asignatura</label>
+                <select formControlName="subject" (change)="onSubjectChange()" class="form-select">
+                    <option value="0" selected disabled>Seleccione una asignatura</option>
+                    @for (subject of subjects; track $index) {
+                        <option value="{{subject.subject_id}}">{{subject.subject_name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <label class="form-label">Comisión</label>
+                <select formControlName="commission" (change)="onCommissionChange()" class="form-select">
+                    <option value="0" selected disabled>Seleccione una comisión</option>
+                    @for (commission of commissions; track $index) {
+                        <option value="{{commission.commission_id}}">{{commission.commission_name}}</option>
+                    }
+                </select>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <label class="form-label">Fecha</label>
+                <input formControlName="attendance_date" (change)="onAttendanceDateChange()" class="form-control" type="date">
+            </div>
+        </form>
+    }
 </section>
 @if (isCommissionSelected) {
     <section class="bg-white border shadow-sm rounded p-4 mb-3">
-        <form [formGroup]="attendancesForm">
-            <div class="mb-3">
-                <h3>Editar asistencia</h3>
+        @if(isLoadingPreviousAttendances) {
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status"></div>
             </div>
-            <ul formArrayName="attendances" class="list-group">
-                @for (enrollment of enrollments; track $index) {
-                    <li [formGroupName]="$index" 
-                        [ngClass]="{
-                            'bg-success': attendances.controls[$index].value.attendance_state_id === 1,
-                            'bg-warning': attendances.controls[$index].value.attendance_state_id === 2,
-                            'bg-danger': attendances.controls[$index].value.attendance_state_id === 3
-                        }"
-                        (click)="toggleAttendanceState($index)"   
-                        class="list-group-item"
-                        role="button">
-                        @switch (attendances.controls[$index].value.attendance_state_id) {
-                            @case (0) {
-                                <span class="badge text-bg-dark user-select-none">Sin estado</span>
-                            }
-                            @case (1) {
-                                <span class="badge text-bg-dark user-select-none">Presente</span>
-                            }
-                            @case (2) {
-                                <span class="badge text-bg-dark user-select-none">Media falta</span>
-                            }
-                            @case (3) {
-                                <span class="badge text-bg-dark user-select-none">Ausente</span>
-                            }
-                        }
-                        <p 
+        } @else if(isErrorPreviousAttendances) {
+            <div class="alert alert-danger mb-0" role="alert">
+                Error al cargar las carreras. Por favor, intente nuevamente más tarde.
+            </div>
+        } @else if (previousAttendances.length === 0) {
+            <p class="mb-0">No hay asistencias registradas.</p>
+        } @else {
+            <form [formGroup]="attendancesForm">
+                <div class="mb-3">
+                    <h3>Estudiantes</h3>
+                </div>
+                <ul formArrayName="attendances" class="list-group">
+                    @for (attendance of previousAttendances; track $index) {
+                        <li [formGroupName]="$index" 
                             [ngClass]="{
-                                'text-white': [1, 3].includes(attendances.controls[$index].value.attendance_state_id),
-                                'text-black': [0, 2].includes(attendances.controls[$index].value.attendance_state_id)
+                                'bg-success': attendances.controls[$index].value.attendance_state_id === 1,
+                                'bg-warning': attendances.controls[$index].value.attendance_state_id === 2,
+                                'bg-danger': attendances.controls[$index].value.attendance_state_id === 3
                             }"
-                            class="d-block d-sm-inline mb-0 ms-sm-3 user-select-none">
-                            {{enrollment.user_id.user_lastname}}, {{enrollment.user_id.user_name}}
-                        </p>
-                    </li>
-                }
-            </ul>
-            <div class="d-flex justify-content-end mt-3">
-                <button (click)="editAttendance()" class="button-accent">Editar asistencia</button>
-            </div>
-        </form>
+                            (click)="toggleAttendanceState($index)"   
+                            class="list-group-item user-select-none"
+                            role="button">
+                            @switch (attendances.controls[$index].value.attendance_state_id) {
+                                @case (0) {
+                                    <span class="badge text-bg-dark user-select-none">Sin estado</span>
+                                }
+                                @case (1) {
+                                    <span class="badge text-bg-dark user-select-none">Presente</span>
+                                }
+                                @case (2) {
+                                    <span class="badge text-bg-dark user-select-none">Media falta</span>
+                                }
+                                @case (3) {
+                                    <span class="badge text-bg-dark user-select-none">Ausente</span>
+                                }
+                            }
+                            <p 
+                                [ngClass]="{
+                                    'text-white': [1, 3].includes(attendances.controls[$index].value.attendance_state_id),
+                                    'text-black': [0, 2].includes(attendances.controls[$index].value.attendance_state_id)
+                                }"
+                                class="d-block d-sm-inline mb-0 ms-sm-3 user-select-none">
+                                {{attendance.enrollment.user.user_lastname}}, {{attendance.enrollment.user.user_name}}
+                            </p>
+                        </li>
+                    }
+                </ul>
+                <div class="d-flex justify-content-end mt-3">
+                    <button (click)="editAttendances()" class="button-accent">Editar asistencia</button>
+                </div>
+            </form>
+        }
     </section>
 } @else {
     <p class="bg-white border shadow-sm rounded p-4 mb-3">
@@ -89,3 +111,4 @@
         Seleccione una asistencia previa para editarla 
     </p>
 }
+<app-notification-toast></app-notification-toast>

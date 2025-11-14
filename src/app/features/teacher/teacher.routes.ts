@@ -4,11 +4,13 @@ import { TeacherDashboard } from './teacher-dashboard/teacher-dashboard';
 import { TeacherEditAttendance } from './teacher-edit-attendance/teacher-edit-attendance';
 import { TeacherSubjects } from './teacher-subjects/teacher-subjects';
 import { TeacherTakeAttendance } from './teacher-take-attendance/teacher-take-attendance';
+import { TeacherJustifyAbsence } from './teacher-justify-absence/teacher-justify-absence';
 
 export const teacher_routes: Routes = [
     { path: 'attendance-list', component: TeacherAttendanceList },
     { path: 'dashboard', component: TeacherDashboard },
     { path: 'edit-attendance', component: TeacherEditAttendance },
+    { path: 'justify-absence', component: TeacherJustifyAbsence },
     { path: 'subjects', component: TeacherSubjects },
     { path: 'take-attendance', component: TeacherTakeAttendance },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

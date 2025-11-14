@@ -19,4 +19,8 @@ export class EnrollmentsServices {
     return this.http.put<EnrollmentInterface>(`${environment.apiUrl}enrollments/${enrollment.enrollment_id}`, enrollment)
   }
 
+  getApprovedEnrollmentsBySubjectIdAndCommissionIdAndAcademicYear($subjectId: number, $commissionId: number, $academicYear: string): Observable<EnrollmentInterface[]> {
+    return this.http.get<EnrollmentInterface[]>(`${environment.apiUrl}enrollments/${$subjectId}/${$commissionId}/${$academicYear}`);
+  }
+
 }
