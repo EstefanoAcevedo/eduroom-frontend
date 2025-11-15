@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import {
+  StudentAttendanceService,
+  StudentAttendanceView
+} from '../student-attendance.service';
 
 @Component({
   selector: 'app-student-attendance-history',
@@ -10,37 +13,48 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './student-attendance-history.html'
 })
 export class StudentAttendanceHistory implements OnInit {
-  attendances = [
-    { fecha: '2025-07-15', materia: 'Matemática I', comision: '1° Año', estado: 'Presente' },
-    { fecha: '2025-07-16', materia: 'Matemática I', comision: '1° Año', estado: 'Ausente' },
-    { fecha: '2025-07-18', materia: 'Matemática I', comision: '1° Año', estado: 'Presente' },
-    { fecha: '2025-07-17', materia: 'Programación II', comision: '2° Año', estado: 'Ausente' },
-    { fecha: '2025-07-19', materia: 'Programación II', comision: '2° Año', estado: 'Presente' },
-    { fecha: '2025-07-21', materia: 'Programación II', comision: '2° Año', estado: 'Justificada' },
-    { fecha: '2025-07-20', materia: 'Análisis de Sistemas', comision: '3° Año', estado: 'Presente' },
-    { fecha: '2025-07-22', materia: 'Análisis de Sistemas', comision: '3° Año', estado: 'Presente' },
-    { fecha: '2025-07-23', materia: 'Probabilidad y Estadistica', comision: '3° Año', estado: 'Presente' },
-    { fecha: '2025-07-23', materia: 'Auditoria de Sistemas', comision: '3° Año', estado: 'Presente' },
-    { fecha: '2025-07-23', materia: 'Auditoria de Sistemas', comision: '3° Año', estado: 'Presente' },
-    { fecha: '2025-07-23', materia: 'Análisis de Sistemas', comision: '3° Año', estado: 'Ausente' }
 
-
-
-  ];
-
+  attendances: StudentAttendanceView[] = [];
+  attendancesFiltradas: StudentAttendanceView[] = [];
   materiasUnicas: string[] = [];
+
   filtroMateria: string = '';
   filtroDesde: string = '';
   filtroHasta: string = '';
 
-  attendancesFiltradas = this.attendances;
+  isLoading = false;
+  hasError = false;
+
+  constructor(private attendanceService: StudentAttendanceService) { }
 
   ngOnInit(): void {
-    // Obtener materias únicas para el selector
-    this.materiasUnicas = [...new Set(this.attendances.map(a => a.materia))];
-    this.filtrar();
+    this.cargarHistorial();
   }
 
+  private cargarHistorial(): void {
+    this.isLoading = true;
+    this.hasError = false;
+
+    this.attendanceService.getMyAttendanceHistory().subscribe({
+      next: (lista: StudentAttendanceView[]) => {
+        this.attendances = lista;
+        this.attendancesFiltradas = [...lista];
+        this.actualizarMateriasUnicas();
+        this.isLoading = false;
+      },
+      error: () => {
+        this.hasError = true;
+        this.isLoading = false;
+      }
+    });
+  }
+
+  private actualizarMateriasUnicas(): void {
+    const setMaterias = new Set(this.attendances.map(a => a.materia));
+    this.materiasUnicas = Array.from(setMaterias);
+  }
+
+  /** Ejecuta el filtrado por materia y rango de fechas */
   filtrar(): void {
     this.attendancesFiltradas = this.attendances.filter(a => {
       const fecha = new Date(a.fecha);
