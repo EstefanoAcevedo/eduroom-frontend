@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
 import {
   StudentAttendanceService,
   StudentAttendanceView
@@ -25,7 +27,10 @@ export class StudentAttendanceHistory implements OnInit {
   isLoading = false;
   hasError = false;
 
-  constructor(private attendanceService: StudentAttendanceService) { }
+  constructor(
+    private attendanceService: StudentAttendanceService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.cargarHistorial();
@@ -38,8 +43,18 @@ export class StudentAttendanceHistory implements OnInit {
     this.attendanceService.getMyAttendanceHistory().subscribe({
       next: (lista: StudentAttendanceView[]) => {
         this.attendances = lista;
-        this.attendancesFiltradas = [...lista];
         this.actualizarMateriasUnicas();
+
+        // 👇 leemos el parámetro 'subject' de la URL (si viene desde el dashboard)
+        const subjectFromRoute = this.route.snapshot.queryParamMap.get('subject');
+
+        if (subjectFromRoute) {
+          this.filtroMateria = subjectFromRoute;
+          this.filtrar();                          // aplica filtro inicial por materia
+        } else {
+          this.attendancesFiltradas = [...lista];  // sin filtro inicial
+        }
+
         this.isLoading = false;
       },
       error: () => {
@@ -68,4 +83,5 @@ export class StudentAttendanceHistory implements OnInit {
       );
     });
   }
+
 }
