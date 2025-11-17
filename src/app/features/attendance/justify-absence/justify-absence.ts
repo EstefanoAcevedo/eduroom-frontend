@@ -1,73 +1,89 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { CareerInterface } from '../../../core/models/careers/career-interface';
+import { SubjectsInterface } from '../../../core/models/subjects/subjects-interface';
+import { CommissionInterface } from '../../../core/models/commissions/commission-interface';
+import { PreviousAttendanceInterface } from '../../../core/models/attendances/previous-attendance-interface';
+import { CareersService } from '../../../core/services/careers/careers-service';
+import { CommissionsService } from '../../../core/services/commissions/commissions-service';
+import { AttendanceStatesService } from '../../../core/services/attendances/attendance-states-service';
+import { AttendancesService } from '../../../core/services/attendances/attendances-service';
+import { NotificationToast } from '../../../shared/components/notifications/notification-toast/notification-toast';
+import { UpdateMultipleAttendancesRequestInterface } from '../../../core/models/attendances/update-multiple-attendances-request-interface';
+import { UpdateMultipleAttendancesResponseInterface } from '../../../core/models/attendances/update-multiple-attendances-response-interface';
 
 @Component({
   selector: 'app-justify-absence',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, NotificationToast],
   templateUrl: './justify-absence.html',
   styleUrl: './justify-absence.css'
 })
 export class JustifyAbsence {
 
   private formBuilder = inject(FormBuilder);
+    private careersService = inject(CareersService);
+    private commissionsService = inject(CommissionsService);
+    private attendanceStatesService = inject(AttendanceStatesService);
+    private attendancesService = inject(AttendancesService);
 
   ngOnInit() {
-    this.careers = [
-      {career_id: 1, career_name: 'Tecnicatura Superior en Análisis y Desarrollo de Software'},
-      {career_id: 2, career_name: 'Tecnicatura Superior en Enfermería'},
-      {career_id: 3, career_name: 'Profesorado de Educación Secundaria en Matemática'},
-    ]
+    this.getCareersWithSubjects();
+    this.getCommissions();
   }
 
-  /* Variable utilizada para determinar cuándo mostrar la tabla para tomar asistencia */
+  isLoading: boolean = true;
+  isError: boolean = false;
+  isLoadingPreviousAttendances: boolean = true;
+  isErrorPreviousAttendances: boolean = false;
   isCommissionSelected: boolean = false;
+  @ViewChild(NotificationToast) notificationToast!: NotificationToast;
 
   /* Variables tipo array que se utilizarán para rellenar los selects del selector de comisión, al principio son vacíos, su valor cambiará a medida que se selecciona una carrera, materia y comisión */
-  careers: {career_id: number, career_name: string}[] = [];
-  subjects: {subject_id: number, subject_name: string, career_id: number} [] = [];
-  commissions: {commission_id: number, commission_name: string} [] = [];
-  enrollments: {enrollment_id: number, enrollment_academic_year: number, user_id: {user_lastname: string, user_name: string}} [] = [];
+  careers: CareerInterface[] = [];
+  subjects: SubjectsInterface[] = [];
+  commissions: CommissionInterface[] = [];
+  absentAttendances: PreviousAttendanceInterface[] = [];
 
   /* Formulario de comisión */
   commissionForm = this.formBuilder.group({
-    career: ['0', Validators.compose([Validators.required, Validators.min(1)])],
-    subject: [{ value: '0', disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
-    commission: [{ value: '0', disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
-    attendance_date: [{ value: '0', disabled: true }, Validators.compose([Validators.required])]
+    career: [0, Validators.compose([Validators.required, Validators.min(1)])],
+    subject: [{ value: 0, disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
+    commission: [{ value: 0, disabled: true }, Validators.compose([Validators.required, Validators.min(1)])],
+    attendance_date: [{ value: '', disabled: true }, Validators.compose([Validators.required])]
   })
 
   onCareerChange() {
-    this.subjects = [
-      {subject_id: 1, subject_name: 'Programación III', career_id: 1},
-      {subject_id: 1, subject_name: 'Probabilidad y Estadística', career_id: 1},
-      {subject_id: 1, subject_name: 'Práctica Profesionalizante III', career_id: 1},
-    ]
+    this.commissionForm.controls.subject.setValue(0);
     this.commissionForm.controls.subject.enable();
+    this.commissionForm.controls.commission.setValue(0);
+    this.commissionForm.controls.commission.disable();
+    this.attendancesForm.controls.attendance_date.reset();
+    this.commissionForm.controls.attendance_date.disable();
+    this.isCommissionSelected = false;
+    this.subjects = this.careers.find(career => career.career_id === Number(this.commissionForm.controls.career.value))?.subjects ?? [];
   }
 
   onSubjectChange() {
-    this.commissions = [
-      {commission_id: 1, commission_name: 'Primera división'},
-      {commission_id: 2, commission_name: 'Segunda división'},
-      {commission_id: 3, commission_name: 'Tercera división'},
-    ]
     this.commissionForm.controls.commission.enable();
+    this.commissionForm.controls.commission.setValue(0);
+    this.attendancesForm.controls.attendance_date.reset();
+    this.commissionForm.controls.attendance_date.disable();
+    this.isCommissionSelected = false;
   }
 
   onCommissionChange() {
+    this.commissionForm.controls.attendance_date.reset();
     this.commissionForm.controls.attendance_date.enable();
   }
   
   onAttendanceDateChange() {
-    this.enrollments = [
-      {enrollment_id: 1, enrollment_academic_year: 2025, user_id: {user_lastname: 'Acevedo', user_name: 'Estéfano Marcial'}},
-      {enrollment_id: 2, enrollment_academic_year: 2025, user_id: {user_lastname: 'Bracamonte', user_name: 'Adrián Alejandro'}},
-      {enrollment_id: 3, enrollment_academic_year: 2025, user_id: {user_lastname: 'Vanegas', user_name: 'Brian'}},
-    ]
-    this.attendancesForm.controls.attendance_date.setValue(this.commissionForm.controls.attendance_date.value);
-    this.newAttendances();
+    let subjectId = Number(this.commissionForm.controls.subject.value);
+    let commissionId = Number(this.commissionForm.controls.commission.value);
+    let attendanceDate = this.commissionForm.controls.attendance_date.value ?? '';
+    this.attendance_date.setValue(attendanceDate);
     this.isCommissionSelected = true;
+    this.getAbsentAttendancesBySubjectIdAndCommissionIdAndDate(subjectId, commissionId, attendanceDate);
   }
 
   attendance_states = [
@@ -80,14 +96,25 @@ export class JustifyAbsence {
     attendances: this.formBuilder.array([])
   })
 
+  newAttendanceForm() {
+    this.attendancesForm = this.formBuilder.group({
+      attendance_date: [this.commissionForm.controls.attendance_date.value, Validators.compose([Validators.required])],
+      attendances: this.formBuilder.array([])
+    })
+  }
+
   newAttendances() {
-    this.enrollments.forEach(enrollment => {
-      const formControl = this.formBuilder.group({
-        enrollment_id: enrollment.enrollment_id,
-        attendance_state_id: [3, Validators.compose([Validators.required, Validators.min(1)])],
+    if (this.absentAttendances.length > 0) {
+      this.absentAttendances.forEach(attendance => {
+        const formControl = this.formBuilder.group({
+          attendance_id: attendance.attendance_id,
+          attendance_is_justified: attendance.attendance_is_justified,
+          enrollment_id: attendance.enrollment.enrollment_id,
+          attendance_state_id: [attendance.attendance_state_id, Validators.compose([Validators.required, Validators.min(1)])],
+        });
+        (this.attendancesForm.get('attendances') as FormArray).push(formControl);
       });
-      (this.attendancesForm.get('attendances') as FormArray).push(formControl);
-    });
+    }
   }
 
   get attendance_date() {
@@ -98,24 +125,107 @@ export class JustifyAbsence {
   }
 
   /* Función para alternar el estado de asistencia de un estudiante */
-  toggleAttendanceState(index: number) {
-    const attendanceState = this.attendances.at(index).get('attendance_state_id');
+  toggleAttendanceIsJustified(index: number) {
+    const attendanceState = this.attendances.at(index).get('attendance_is_justified');
     switch (attendanceState?.value) {
-      case 3: // Marcar como justificado cuando está ausente
-          this.attendances.at(index).get('attendance_state_id')?.setValue(4);
+      case 0:
+          this.attendances.at(index).get('attendance_is_justified')?.setValue(1);
         break;
-      default:  // Marcar como ausente en cualquier otro caso
-        this.attendances.at(index).get('attendance_state_id')?.setValue(3);
+      default:
+        this.attendances.at(index).get('attendance_is_justified')?.setValue(0);
         break;
     }
   }
 
-  editAttendance() {
+  updateMultipleAttendancesRequest?: UpdateMultipleAttendancesRequestInterface;
+  updateMultipleAttendancesResponse?: UpdateMultipleAttendancesResponseInterface;
+  justifyAttendance() {
     if (this.attendancesForm.valid) {
-      console.log(this.attendancesForm.value);
-    } else {
-      this.attendancesForm.markAllAsTouched();
-    }
+          this.notificationToast.show({
+            status: 'loading'
+          });
+          this.updateMultipleAttendancesRequest = this.attendancesForm.value as UpdateMultipleAttendancesRequestInterface;
+          this.attendancesService.updateMultipleAttendances(this.updateMultipleAttendancesRequest).subscribe({
+            next: (response) => {
+              this.updateMultipleAttendancesResponse = response;
+              this.notificationToast.show({
+                status: 'success',
+                title: 'Éxito',
+                message: response.message
+              });
+              this.isCommissionSelected = false;
+              this.newAttendanceForm();
+              this.commissionForm.controls.commission.reset();
+              this.commissionForm.controls.commission.setValue(0);
+              this.commissionForm.controls.attendance_date.setValue('');
+              this.commissionForm.controls.attendance_date.reset();
+              this.commissionForm.controls.attendance_date.disable();
+            },
+            error: (error) => {
+              this.updateMultipleAttendancesResponse = error;
+              this.notificationToast.show({
+                status: 'error',
+                title: 'Error al registrar asistencias',
+                message: this.updateMultipleAttendancesResponse?.error
+              });
+            }
+          })
+          
+        } else if (this.attendances.invalid) {
+          this.attendancesForm.markAllAsTouched();
+          
+        } else {
+          this.attendancesForm.markAllAsTouched();
+        }
+  }
+
+  getCareersWithSubjects() {
+    this.isLoading = true;
+    this.careersService.getCareersWithSubjects().subscribe({
+      next: (response => {
+        this.careers = response;
+        this.isLoading = false;
+      }),
+      error: (error => {
+        console.error('Error al obtener las carreras', error)
+        this.isLoading = false;
+        this.isError = true;
+      })
+    })
+  }
+
+  getCommissions() {
+    this.isLoading = true;
+    this.commissionsService.getCommissions().subscribe({
+      next: (response => {
+        this.commissions = response;
+        this.isLoading = false;
+      }),
+      error: (error => {
+        console.error('Error al obtener las comisiones', error)
+        this.isLoading = false;
+        this.isError = true;
+      })
+    })
+  }
+  
+  /* Obtiene las inscripciones y luego llama a newAttendances() para construir el formulario de toma de asistencia */
+  getAbsentAttendancesBySubjectIdAndCommissionIdAndDate($subjectId: number, $commissionId: number, $date: string) {
+    this.isLoadingPreviousAttendances = true;
+    this.isErrorPreviousAttendances = false;
+    this.attendancesService.getAbsentAttendances($subjectId, $commissionId, $date).subscribe({
+      next: (response => {
+        this.absentAttendances = response;
+        this.newAttendanceForm();
+        this.newAttendances();
+        this.isLoadingPreviousAttendances = false;
+      }),
+      error: (error => {
+        console.error('Error al obtener las inscripciones', error)
+        this.isLoadingPreviousAttendances = false;
+        this.isErrorPreviousAttendances = true;
+      })
+    })
   }
 
 }

@@ -27,7 +27,6 @@ export class EditAttendance {
   private formBuilder = inject(FormBuilder);
   private careersService = inject(CareersService);
   private commissionsService = inject(CommissionsService);
-  private enrollmentsService = inject(EnrollmentsServices);
   private attendanceStatesService = inject(AttendanceStatesService);
   private attendancesService = inject(AttendancesService);
   
@@ -157,43 +156,44 @@ export class EditAttendance {
   updateMultipleAttendancesResponse?: UpdateMultipleAttendancesResponseInterface;
   editAttendances() {
     if (this.attendancesForm.valid) {
+      this.notificationToast.show({
+        status: 'loading'
+      });
+      this.updateMultipleAttendancesRequest = this.attendancesForm.value as UpdateMultipleAttendancesRequestInterface;
+      this.isAttendancesInvalid = false;
+      this.attendancesService.updateMultipleAttendances(this.updateMultipleAttendancesRequest).subscribe({
+        next: (response) => {
+          this.updateMultipleAttendancesResponse = response;
           this.notificationToast.show({
-            status: 'loading'
+            status: 'success',
+            title: 'Éxito',
+            message: response.message
           });
-          this.updateMultipleAttendancesRequest = this.attendancesForm.value as UpdateMultipleAttendancesRequestInterface;
-          this.isAttendancesInvalid = false;
-          this.attendancesService.updateMultipleAttendances(this.updateMultipleAttendancesRequest).subscribe({
-            next: (response) => {
-              this.updateMultipleAttendancesResponse = response;
-              this.notificationToast.show({
-                status: 'success',
-                title: 'Éxito',
-                message: response.message
-              });
-              this.isCommissionSelected = false;
-              this.newAttendanceForm();
-              this.commissionForm.controls.commission.reset();
-              this.commissionForm.controls.commission.setValue(0);
-              this.commissionForm.controls.attendance_date.setValue('');
-              this.commissionForm.controls.attendance_date.reset();
-            },
-            error: (error) => {
-              this.updateMultipleAttendancesResponse = error;
-              this.notificationToast.show({
-                status: 'error',
-                title: 'Error al registrar asistencias',
-                message: this.updateMultipleAttendancesResponse?.error
-              });
-            }
-          })
-          
-        } else if (this.attendances.invalid) {
-          this.isAttendancesInvalid = true;
-          this.attendancesForm.markAllAsTouched();
-          
-        } else {
-          this.attendancesForm.markAllAsTouched();
+          this.isCommissionSelected = false;
+          this.newAttendanceForm();
+          this.commissionForm.controls.commission.reset();
+          this.commissionForm.controls.commission.setValue(0);
+          this.commissionForm.controls.attendance_date.setValue('');
+          this.commissionForm.controls.attendance_date.reset();
+          this.commissionForm.controls.attendance_date.disable();
+        },
+        error: (error) => {
+          this.updateMultipleAttendancesResponse = error;
+          this.notificationToast.show({
+            status: 'error',
+            title: 'Error al registrar asistencias',
+            message: this.updateMultipleAttendancesResponse?.error
+          });
         }
+      })
+      
+    } else if (this.attendances.invalid) {
+      this.isAttendancesInvalid = true;
+      this.attendancesForm.markAllAsTouched();
+      
+    } else {
+      this.attendancesForm.markAllAsTouched();
+    }
   }
 
   getCareersWithSubjects() {

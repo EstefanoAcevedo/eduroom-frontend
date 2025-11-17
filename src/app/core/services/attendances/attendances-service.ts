@@ -27,4 +27,8 @@ export class AttendancesService {
     return this.http.put<UpdateMultipleAttendancesResponseInterface>(`${environment.apiUrl}update-multiple-attendances`, request);
   }
 
+  getAbsentAttendances(subjectId: number, commissionId: number, date: string): Observable<PreviousAttendanceInterface[]> {
+    return this.http.get<PreviousAttendanceInterface[]>(`${environment.apiUrl}absent-attendances/${subjectId}/${commissionId}/${date}`);
+  }
+
 }
