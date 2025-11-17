@@ -1,8 +1,9 @@
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth/auth-service';
 import { NotificationToast } from "../notifications/notification-toast/notification-toast";
 import { Router } from '@angular/router';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,6 +23,28 @@ export class Sidebar {
   ngOnInit() {
     this.userName = sessionStorage.getItem('user_name') || '';
     this.userRol = sessionStorage.getItem('roles') || '';
+  }
+
+  @ViewChild('sidebar') sidebarElement!: ElementRef;
+  private sidebarOffcanvas!: bootstrap.Offcanvas;
+
+  ngAfterViewInit() {
+    this.sidebarOffcanvas = new bootstrap.Offcanvas(
+      this.sidebarElement.nativeElement,
+      {
+        backdrop: true,      // mostramos backdrop
+        keyboard: false,     // no se cierra con Esc
+        scroll: false
+      }
+    );
+  }
+
+  open() {
+    this.sidebarOffcanvas.show();
+  }
+
+  close() {
+    this.sidebarOffcanvas.hide();
   }
 
   logout() {
