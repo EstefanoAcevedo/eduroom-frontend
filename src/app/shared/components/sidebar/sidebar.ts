@@ -32,8 +32,8 @@ export class Sidebar {
     this.sidebarOffcanvas = new bootstrap.Offcanvas(
       this.sidebarElement.nativeElement,
       {
-        backdrop: true,      // mostramos backdrop
-        keyboard: false,     // no se cierra con Esc
+        backdrop: true,     
+        keyboard: true,    
         scroll: false
       }
     );
