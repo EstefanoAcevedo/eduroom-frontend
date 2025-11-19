@@ -1,1 +1,56 @@
+<!-- Botón para abrir/cerrar formulario -->
+<div class="mt-4 mb-2">
+    <button class="btn btn-outline-primary" (click)="toggleEnrollmentForm()">
+        {{ showEnrollmentForm ? 'Cerrar inscripción' : 'Nueva inscripción' }}
+    </button>
+</div>
+
+<!-- Formulario de nueva inscripción -->
+<div *ngIf="showEnrollmentForm" class="card p-3 mb-4 shadow-sm">
+    <h5 class="mb-3">Inscribirme a una Materia</h5>
+
+    <form (ngSubmit)="onSubmitEnrollment()">
+
+        <!-- 1) Seleccionar carrera -->
+        <div class="mb-3">
+            <label class="form-label">Carrera</label>
+            <select class="form-select" [(ngModel)]="selectedCareer" name="career" (change)="loadSubjectsByCareer()">
+                <option [ngValue]="null">Seleccione una carrera</option>
+                <option *ngFor="let c of careers" [ngValue]="c">
+                    {{ c.career_name }}
+                </option>
+            </select>
+        </div>
+
+        <!-- 2) Seleccionar comisión -->
+        <div class="mb-3">
+            <label class="form-label">Comisión</label>
+            <select class="form-select" [(ngModel)]="selectedCommission" name="commission"
+                (change)="onCommissionChange()" [disabled]="!selectedCareer">
+                <option [ngValue]="null">Seleccione comisión</option>
+                <option *ngFor="let c of filteredCommissions" [ngValue]="c">
+                    {{ c.commission_name }}
+                </option>
+            </select>
+        </div>
+
+        <!-- 3) Seleccionar materia -->
+        <div class="mb-3">
+            <label class="form-label">Materia</label>
+            <select class="form-select" [(ngModel)]="selectedSubject" name="subject" [disabled]="!selectedCommission">
+                <option [ngValue]="null">Seleccione materia</option>
+                <option *ngFor="let s of filteredSubjects" [ngValue]="s">
+                    {{ s.subject_name }}
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="!selectedSubject || !selectedCommission">
+            Inscribirme
+        </button>
+
+    </form>
+</div>
+
+
 <app-mis-materias [subjects]="subjects"></app-mis-materias>

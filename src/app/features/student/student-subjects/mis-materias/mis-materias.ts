@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { StudentSubjectView } from '../../../../core/services/subjects/student-subject-view';
 @Component({
   selector: 'app-mis-materias',
   standalone: true,
@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./mis-materias.css']
 })
 export class MisMateriasComponent {
-  @Input() subjects: any[] = [];
+  @Input() subjects: StudentSubjectView[] = [];
 }

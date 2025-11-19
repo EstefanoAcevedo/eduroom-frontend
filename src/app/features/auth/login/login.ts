@@ -34,11 +34,15 @@ export class Login {
     user_name: string;
     user_lastname: string;
     roles: string[];
+    user_id: number;
   }): void {
+
     sessionStorage.setItem('authToken', data.token);
     sessionStorage.setItem('user_name', `${data.user_name} ${data.user_lastname}`);
-    sessionStorage.setItem('roles', JSON.stringify(data.roles)); // guardar como JSON
+    sessionStorage.setItem('roles', JSON.stringify(data.roles));
+    sessionStorage.setItem('user_id', String(data.user_id)); // 👈 AGREGADO
   }
+
 
   @ViewChild(NotificationToast) notificationToast!: NotificationToast;
   onSubmit() {
@@ -48,55 +52,54 @@ export class Login {
       this.notificationToast.show({
         status: 'loading'
       })
-      
-      
+
+
       const user_email = String(this.loginForm.value.user_email || '').trim();
       const user_pass = String(this.loginForm.value.user_pass || '').trim();
-      
+
       const loginRequest: LoginRequestInterface = { user_email, user_pass };
 
-    this.authService.login(loginRequest).subscribe({
-      next: (response) => {
-        // Normalizar roles a array de strings: ['admin', 'docente', 'estudiante']
-        let rolesRaw = response?.user?.roles ?? [];
-        const roles: string[] = Array.isArray(rolesRaw)
-          ? rolesRaw.map((r: any) => typeof r === 'string' ? r : (r?.name ?? '')).filter(Boolean)
-          : [String(rolesRaw || '')].filter(Boolean);
+      this.authService.login(loginRequest).subscribe({
+        next: (response) => {
+          // Normalizar roles a array de strings: ['admin', 'docente', 'estudiante']
+          let rolesRaw = response?.user?.roles ?? [];
+          const roles: string[] = Array.isArray(rolesRaw)
+            ? rolesRaw.map((r: any) => typeof r === 'string' ? r : (r?.name ?? '')).filter(Boolean)
+            : [String(rolesRaw || '')].filter(Boolean);
 
-        this.inicioExitoso({
-          token: response.access_token,
-          user_name: response.user.user_name,
-          user_lastname: response.user.user_lastname,
-          roles,
-        });
+          this.inicioExitoso({
+            token: response.access_token,
+            user_id: response.user.user_id,              // 👈 ahora sí
+            user_name: response.user.user_name,
+            user_lastname: response.user.user_lastname,
+            roles
+          });
 
-        // Elegir destino según rol (case-insensitive)
-        const has = (role: string) => roles.some(r => r.toLowerCase() === role.toLowerCase());
+          // Elegir destino según rol (case-insensitive)
+          const has = (role: string) => roles.some(r => r.toLowerCase() === role.toLowerCase());
 
-        this.notificationToast.hide();
+          this.notificationToast.hide();
 
-        if (has('admin')) {
-          this.router.navigate(['/private/admin/dashboard'], { replaceUrl: true });
-        } else if (has('teacher')) {
-          this.router.navigate(['/private/teacher/dashboard'], { replaceUrl: true });
-        } else if (has('student')) {
-          this.router.navigate(['/private/student/dashboard'], { replaceUrl: true });
-        } else {
-          // fallback genérico si no hay rol conocido
-          this.router.navigate(['/dashboard'], { replaceUrl: true });
+          if (has('admin')) {
+            this.router.navigate(['/private/admin/dashboard'], { replaceUrl: true });
+          } else if (has('teacher')) {
+            this.router.navigate(['/private/teacher/dashboard'], { replaceUrl: true });
+          } else if (has('student')) {
+            this.router.navigate(['/private/student/dashboard'], { replaceUrl: true });
+          } else {
+            this.router.navigate(['/dashboard'], { replaceUrl: true });
+          }
+        },
+        error: (error) => {
+          console.error('Error durante el inicio de sesión:', error);
+          this.notificationToast.show({
+            status: 'error',
+            title: 'Error al iniciar sesión',
+            message: error.error?.message
+          });
         }
-      },
-      error: (error) => {
-        console.error('Error durante el inicio de sesión:', error);
-        // acá podrías setear un mensaje en pantalla
-        this.notificationToast.show({
-          status: 'error',
-          title: 'Error al iniciar sesión',
-          message: error.error?.message
-        })
-      }
-      // IMPORTANTE: sin 'complete' que navegue — no lo uses para redirigir
-    });
-  }
+      });
+
+    }
   }
 }

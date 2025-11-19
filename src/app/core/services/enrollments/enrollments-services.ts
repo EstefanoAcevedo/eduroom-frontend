@@ -23,4 +23,9 @@ export class EnrollmentsServices {
     return this.http.get<EnrollmentInterface[]>(`${environment.apiUrl}enrollments/${$subjectId}/${$commissionId}/${$academicYear}`);
   }
 
+  postEnrollment(data: any) {
+    return this.http.post(`${environment.apiUrl}enrollments`, data);
+  }
+
+
 }
