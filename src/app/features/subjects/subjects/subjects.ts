@@ -18,9 +18,11 @@ export class Subjects {
   private subjectsService = inject(SubjectsService);
 
   ngOnInit() {
+    this.userRol = sessionStorage.getItem('roles') || '';
     this.getCareersWithSubjects();
   }
 
+  userRol: string = '';
   isError: boolean = false;
   isLoading: boolean = true;
   isCareerMode: boolean = true;
@@ -32,6 +34,7 @@ export class Subjects {
     career: ['0', Validators.compose([Validators.required, Validators.min(1)])],
   })
 
+  /* Obtener carreras y sus asignaturas */
   getCareersWithSubjects() {
     this.isLoading = true;
     this.careersService.getCareersWithSubjects().subscribe({
@@ -47,10 +50,13 @@ export class Subjects {
     })
   }
 
+  /* Obtener carreras según el índice del array careers */
   getSubjectsByCareerIndex(index: number) {
     this.isCareerMode = false;
     this.subjects = this.careers[index].subjects || [];
   }
+
+  /* */
 
 }
 
