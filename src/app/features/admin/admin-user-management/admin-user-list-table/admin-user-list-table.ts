@@ -14,6 +14,7 @@ export class AdminUserListTable {
 
   private usersService = inject(UsersService);
   @ViewChild(AdminModalEditUser) adminModalEditUser!: AdminModalEditUser;
+  @ViewChild(AdminModalDeleteUser) adminModalDeleteUser!: AdminModalDeleteUser;
 
   ngOnInit() {
     this.getUsers();
@@ -36,6 +37,24 @@ export class AdminUserListTable {
         this.isError = true;
       }
     })
+  }
+
+  showEditUserModal(user: UserInterface) {
+    this.adminModalEditUser.user = user;
+    this.adminModalEditUser.show();
+  }
+
+  hideEditUserModal() {
+    this.adminModalEditUser.hide();
+  }
+
+  showDeleteUserModal(user: UserInterface) {
+    this.adminModalDeleteUser.user = user;
+    this.adminModalDeleteUser.show();
+  }
+
+  hideDeleteUserModal() {
+    this.adminModalDeleteUser.hide();
   }
 
 }

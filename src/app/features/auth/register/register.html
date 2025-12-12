@@ -96,7 +96,7 @@
                             <div class="invalid-feedback d-block">
                                 @if (email.hasError("required")) {Introduzca un correo electrónico}
                                 @if (email.hasError("maxlength")) {Demasiado largo}
-                                @if (email.hasError("pattern")) {Correo electrónico inválido}
+                                @if (email.hasError("email")) {Correo electrónico inválido}
                             </div>
                         }
                     </div>

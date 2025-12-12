@@ -69,7 +69,7 @@ export class Login {
 
           this.inicioExitoso({
             token: response.access_token,
-            user_id: response.user.user_id,              // 👈 ahora sí
+            user_id: response.user.user_id!,              // 👈 ahora sí
             user_name: response.user.user_name,
             user_lastname: response.user.user_lastname,
             roles

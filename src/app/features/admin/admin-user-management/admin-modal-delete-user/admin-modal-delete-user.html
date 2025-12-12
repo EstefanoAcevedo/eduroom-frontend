@@ -1,4 +1,4 @@
-<div id="admin-modal-delete-user" class="modal fade" tabindex="-1">
+<div #adminModalDeleteUser class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,10 +6,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Eliminará al usuario (Apellido-Nombre-DNI)</p>
+                <p>Eliminará al usuario: <strong>{{user?.user_lastname}}, {{user?.user_name}} - CUIL: {{user?.user_cuil}}</strong></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                @if (isDeleting) {
+                    <button class="btn btn-danger" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Eliminando...</span>
+                    </button>
+                } @else {
+                    <button (click)="deleteUser()" type="button" class="btn btn-danger">Eliminar</button>
+                }
             </div>
         </div>
     </div>

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
+import * as bootstrap from 'bootstrap';
+import { UserInterface } from '../../../../core/models/users/user-interface';
+import { UsersService } from '../../../../core/services/users/users-service';
 
 @Component({
   selector: 'app-admin-modal-delete-user',
@@ -7,5 +10,39 @@ import { Component } from '@angular/core';
   styleUrl: './admin-modal-delete-user.css'
 })
 export class AdminModalDeleteUser {
+
+  @ViewChild('adminModalDeleteUser') modalElement!: ElementRef;
+  private modalEditUser!: bootstrap.Modal;
+  private usersService = inject(UsersService);
+  isDeleting: boolean = false;
+
+  ngAfterViewInit() {
+      this.modalEditUser = new bootstrap.Modal(this.modalElement.nativeElement);
+  }
+
+  show() {
+    this.modalEditUser.show();
+  }
+
+  hide() {
+    this.modalEditUser.hide();
+  }
+
+  @Input() user: UserInterface | null = null;
+
+  deleteUser() {
+    this.isDeleting = true;
+    this.usersService.deleteUser(this.user?.user_id!).subscribe({
+      next: (response) => {
+        console.log("Usuario eliminado correctamente", response);
+        this.isDeleting = false;
+        this.hide();
+      },
+      error: (error) => {
+        this.isDeleting = false;
+        console.log("Error al eliminar el usuario", error);
+      }
+    })
+  }
 
 }

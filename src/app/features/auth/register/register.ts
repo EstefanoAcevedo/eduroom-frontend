@@ -17,7 +17,6 @@ import { NotificationToast } from '../../../shared/components/notifications/noti
 export class Register {
 
   private formBuilder = inject(FormBuilder);
-  private router = inject(Router);
   private locationsService = inject(LocationsService);
   private rolesService = inject(RolesService);
   private authService = inject(AuthService);

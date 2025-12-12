@@ -1,5 +1,5 @@
 export interface UserInterface {
-    user_id: number;
+    user_id?: number;
     user_cuil: string;
     user_email: string;
     user_lastname: string;
@@ -7,7 +7,8 @@ export interface UserInterface {
     user_tel: string;
     user_address: string;
     user_location: string;
-    created_at: string;
-    updated_at: string;
-    roles: string[];
+    created_at?: string;
+    updated_at?: string;
+    rol?: string;
+    roles?: string[];
 }

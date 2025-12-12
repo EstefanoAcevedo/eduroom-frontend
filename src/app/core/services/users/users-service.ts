@@ -15,4 +15,12 @@ export class UsersService {
     return this.http.get<UserInterface[]>(`${environment.apiUrl}users`);
   }
 
+  updateUser(user: UserInterface, user_id: number): Observable<UserInterface> {
+    return this.http.put<UserInterface>(`${environment.apiUrl}users/${user_id}`, user);
+  }
+
+  deleteUser(user_id: number): Observable<UserInterface> {
+    return this.http.delete<UserInterface>(`${environment.apiUrl}users/${user_id}`);
+  }
+
 }

@@ -1,4 +1,4 @@
-<div id="admin-modal-edit-user" class="modal fade" tabindex="-1">
+<div #adminModalEditUser class="modal fade" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,119 +8,104 @@
             <div class="modal-body">
                 <form [formGroup]="editUserForm" class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label">Documento</label>
-                        <input formControlName="usDocumento" class="form-control" type="text">
-                        @if (usDocumento.invalid && (usDocumento.dirty || usDocumento.touched)) {
-                            @if (usDocumento.hasError("required")) {
-                                <p class="text-danger">Introduzca un DNI</p>
-                            }
-                            @if (usDocumento.hasError("minlength") || usDocumento.hasError("maxlength") || usDocumento.hasError("pattern")) {
-                                <p class="text-danger">DNI inválido</p>
-                            }
+                        <label class="form-label">CUIL</label>
+                        <input class="form-control" type="text" placeholder="CUIL" formControlName="cuil">
+                        @if (cuil.invalid && (cuil.dirty || cuil.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (cuil.hasError("required")) {Introduzca un CUIL}
+                                @if (cuil.hasError("minlength") || cuil.hasError("maxlength") || cuil.hasError("pattern")) {CUIL inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Correo electrónico</label>
-                        <input formControlName="usMail" class="form-control" type="email">
-                        @if (usMail.invalid && (usMail.dirty || usMail.touched)) {
-                            @if (usMail.hasError("required")) {
-                                <p class="text-danger">Introduzca un correo electrónico</p>
-                            }
-                            @if (usMail.hasError("maxlength")) {
-                                <p class="text-danger">Demasiado largo</p>
-                            }
-                            @if (usMail.hasError("pattern")) {
-                                <p class="text-danger">Correo electrónico inválido</p>
-                            }
+                        <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email">
+                        @if (email.invalid && (email.dirty || email.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (email.hasError("required")) {Introduzca un correo electrónico}
+                                @if (email.hasError("maxlength")) {Demasiado largo}
+                                @if (email.hasError("email")) {Correo electrónico inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Apellido</label>
-                        <input formControlName="usApellido" class="form-control" type="text">
-                        @if (usApellido.invalid && (usApellido.dirty || usApellido.touched)) {
-                            @if (usApellido.hasError("required")) {
-                                <p class="text-danger">Introduzca un apellido</p>
-                            }
-                            @if (usApellido.hasError("maxlength")) {
-                                <p class="text-danger">Demasiado largo</p>
-                            }
-                            @if (usApellido.hasError("pattern")) {
-                                <p class="text-danger">Apellido inválido</p>
-                            }
+                        <input class="form-control" type="text" placeholder="Apellido" formControlName="lastname">
+                        @if (lastname.invalid && (lastname.dirty || lastname.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (lastname.hasError("required")) {Introduzca un apellido}
+                                @if (lastname.hasError("maxlength")) {Demasiado largo}
+                                @if (lastname.hasError("pattern")) {Apellido inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Nombre</label>
-                        <input formControlName="usNombre" class="form-control" type="text">
-                        @if (usNombre.invalid && (usNombre.dirty || usNombre.touched)) {
-                            @if (usNombre.hasError("required")) {
-                                <p class="text-danger">Introduzca un nombre</p>
-                            }
-                            @if (usNombre.hasError("maxLength")) {
-                                <p class="text-danger">Demasiado largo</p>
-                            }
-                            @if (usNombre.hasError("pattern")) {
-                                <p class="text-danger">Nombre inválido</p>
-                            }
+                        <input class="form-control" type="text" placeholder="Nombre" formControlName="name">
+                        @if (name.invalid && (name.dirty || name.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (name.hasError("required")) {Introduzca un nombre}
+                                @if (name.hasError("maxlength")) {Demasiado largo}
+                                @if (name.hasError("pattern")) {Nombre inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Teléfono</label>
-                        <input formControlName="usTelefono" class="form-control" type="tel">
-                        @if (usTelefono.invalid && (usTelefono.dirty || usTelefono.touched)) {
-                            @if (usTelefono.hasError("required")) {
-                                <p class="text-danger">Introduzca un número de teléfono</p>
-                            }
-                            @if (usTelefono.hasError("pattern")) {
-                                <p class="text-danger">Número de teléfono inválido</p>
-                            }
+                        <input class="form-control" type="tel" placeholder="Teléfono" formControlName="tel">
+                        @if (tel.invalid && (tel.dirty || tel.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (tel.hasError("required")) {Introduzca un número de teléfono}
+                                @if (tel.hasError("pattern")) {Número de teléfono inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Domicilio</label>
-                        <input formControlName="usDomicilio" class="form-control" type="text">
-                        @if (usDomicilio.invalid && (usDomicilio.dirty || usDomicilio.touched)) {
-                            @if (usDomicilio.hasError("required")) {
-                                <p class="text-danger">Introduzca un domicilio</p>
-                            }
-                            @if (usDomicilio.hasError("maxlength")) {
-                                <p class="text-danger">Demasiado largo</p>
-                            }
-                            @if (usDomicilio.hasError("pattern")) {
-                                <p class="text-danger">Domicilio inválido</p>
-                            }
+                        <input class="form-control" type="text" placeholder="Domicilio" formControlName="address">
+                        @if (address.invalid && (address.dirty || address.touched)) {
+                            <div class="invalid-feedback d-block">
+                                @if (address.hasError("required")) {Introduzca un domicilio}
+                                @if (address.hasError("maxlength")) {Demasiado largo}
+                                @if (address.hasError("pattern")) {Domicilio inválido}
+                            </div>
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Localidad</label>
-                        <select formControlName="idLocalidad" class="form-select">
-                            <option value="1">Nogoyá, Entre Ríos. Argentina</option>
-                            <option value="2">Victoria, Entre Ríos. Argentina</option>
-                        </select>
-                        @if (idLocalidad.invalid && (idLocalidad.dirty || idLocalidad.touched)) {
-                            @if (idLocalidad.hasError("required")) {
+                        <input class="form-control" type="text" placeholder="Localidad" formControlName="location">
+                        @if (location.invalid && (location.dirty || location.touched)) {
+                            @if (location.hasError("required")) {
                                 <p class="text-danger">Seleccione una localidad</p>
                             }
                         }
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Rol</label>
-                        <select formControlName="idRol" class="form-select">
-                            <option value="1">Administrador</option>
-                            <option value="2">Profesor</option>
-                            <option value="3">Estudiante</option>
-                        </select>
-                        @if (idRol.invalid && (idRol.dirty || idRol.touched)) {
-                            @if (idRol.hasError("required")) {
-                                <p class="text-danger">Seleccione un rol</p>
+                        <select class="form-select" formControlName="rol">
+                            <option value="" disabled>Seleccione un rol</option>
+                            @for (rol of roles; track $index) {
+                                <option class="option" value="{{rol.name}}">{{rol.name}}</option>
                             }
+                        </select>
+                        @if (rol.invalid && (rol.dirty || rol.touched)) {
+                            <div class="invalid-feedback d-block">
+                                Seleccione un rol
+                            </div>
                         }
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button (click)="editUser()" type="button" class="btn btn-success">Guardar cambios</button>
+                <button (click)="hide()" type="button" class="btn btn-danger">Cancelar</button>
+                @if (isEditing) {
+                    <button class="btn btn-success" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                        <span role="status">Guardando...</span>
+                    </button>
+                } @else {
+                    <button (click)="editUser()" type="button" class="btn btn-success">Guardar cambios</button>
+                }
             </div>
         </div>
     </div>
