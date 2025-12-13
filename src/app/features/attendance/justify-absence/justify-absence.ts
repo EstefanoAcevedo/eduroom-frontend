@@ -32,7 +32,8 @@ export class JustifyAbsence {
     this.getCommissions();
   }
 
-  isLoading: boolean = true;
+  isLoadingCareers: boolean = true;
+  isEditingAttendance: boolean = false;
   isError: boolean = false;
   isLoadingPreviousAttendances: boolean = true;
   isErrorPreviousAttendances: boolean = false;
@@ -141,12 +142,11 @@ export class JustifyAbsence {
   updateMultipleAttendancesResponse?: UpdateMultipleAttendancesResponseInterface;
   justifyAttendance() {
     if (this.attendancesForm.valid) {
-          this.notificationToast.show({
-            status: 'loading'
-          });
+          this.isEditingAttendance = true;
           this.updateMultipleAttendancesRequest = this.attendancesForm.value as UpdateMultipleAttendancesRequestInterface;
           this.attendancesService.updateMultipleAttendances(this.updateMultipleAttendancesRequest).subscribe({
             next: (response) => {
+              this.isEditingAttendance = false;
               this.updateMultipleAttendancesResponse = response;
               this.notificationToast.show({
                 status: 'success',
@@ -162,6 +162,7 @@ export class JustifyAbsence {
               this.commissionForm.controls.attendance_date.disable();
             },
             error: (error) => {
+              this.isEditingAttendance = false;
               this.updateMultipleAttendancesResponse = error;
               this.notificationToast.show({
                 status: 'error',
@@ -180,30 +181,30 @@ export class JustifyAbsence {
   }
 
   getCareersWithSubjects() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.careersService.getCareersWithSubjects().subscribe({
       next: (response => {
         this.careers = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las carreras', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })
   }
 
   getCommissions() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.commissionsService.getCommissions().subscribe({
       next: (response => {
         this.commissions = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las comisiones', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })

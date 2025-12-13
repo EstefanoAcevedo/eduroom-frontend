@@ -36,7 +36,8 @@ export class TakeAttendance {
     this.getAttendanceStates();
   }
   
-  isLoading: boolean = true;
+  isRegisteringAttendance: boolean = false;
+  isLoadingCareers: boolean = true;
   isError: boolean = false;
   isLoadingEnrollments: boolean = true;
   isErrorEnrollments: boolean = false;
@@ -149,13 +150,12 @@ export class TakeAttendance {
   
   registerAttendance() {
     if (this.attendancesForm.valid) {
-      this.notificationToast.show({
-        status: 'loading'
-      });
+      this.isRegisteringAttendance = true;
       this.storeMultipleAttendancesRequest = this.attendancesForm.value as StoreMultipleAttendancesRequestInterface;
       this.isAttendancesInvalid = false;
       this.attendancesService.storeMultipleAttendances(this.storeMultipleAttendancesRequest).subscribe({
         next: (response) => {
+          this.isRegisteringAttendance = false;
           this.storeMultipleAttendancesResponse = response;
           this.notificationToast.show({
             status: 'success',
@@ -168,6 +168,7 @@ export class TakeAttendance {
           this.commissionForm.controls.commission.setValue(0);
         },
         error: (error) => {
+          this.isRegisteringAttendance = false;
           this.storeMultipleAttendancesResponse = error;
           this.notificationToast.show({
             status: 'error',
@@ -187,30 +188,30 @@ export class TakeAttendance {
   }
   
   getCareersWithSubjects() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.careersService.getCareersWithSubjects().subscribe({
       next: (response => {
         this.careers = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las carreras', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })
   }
   
   getCommissions() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.commissionsService.getCommissions().subscribe({
       next: (response => {
         this.commissions = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las comisiones', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })
@@ -236,15 +237,15 @@ export class TakeAttendance {
   
   attendance_states: AttendanceStateInterface[] = []
   getAttendanceStates() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.attendanceStatesService.getAttendanceStates().subscribe({
       next: (response => {
         this.attendance_states = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener los estados de asistencia', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })

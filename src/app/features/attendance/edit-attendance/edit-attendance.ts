@@ -3,13 +3,11 @@ import { ReactiveFormsModule, FormBuilder, FormArray, Validators } from '@angula
 import { NgClass } from '@angular/common';
 import { CareersService } from '../../../core/services/careers/careers-service';
 import { CommissionsService } from '../../../core/services/commissions/commissions-service';
-import { EnrollmentsServices } from '../../../core/services/enrollments/enrollments-services';
 import { AttendanceStatesService } from '../../../core/services/attendances/attendance-states-service';
 import { AttendancesService } from '../../../core/services/attendances/attendances-service';
 import { CareerInterface } from '../../../core/models/careers/career-interface';
 import { SubjectsInterface } from '../../../core/models/subjects/subjects-interface';
 import { CommissionInterface } from '../../../core/models/commissions/commission-interface';
-import { EnrollmentInterface } from '../../../core/models/enrollments/enrollment-interface';
 import { AttendanceStateInterface } from '../../../core/models/attendances/attendance-state-interface';
 import { NotificationToast } from '../../../shared/components/notifications/notification-toast/notification-toast';
 import { PreviousAttendanceInterface } from '../../../core/models/attendances/previous-attendance-interface';
@@ -36,7 +34,8 @@ export class EditAttendance {
     this.getAttendanceStates();
   }
   
-  isLoading: boolean = true;
+  isLoadingCareers: boolean = false;
+  isEditingAttendance: boolean = false;
   isError: boolean = false;
   isLoadingPreviousAttendances: boolean = true;
   isErrorPreviousAttendances: boolean = false;
@@ -156,13 +155,12 @@ export class EditAttendance {
   updateMultipleAttendancesResponse?: UpdateMultipleAttendancesResponseInterface;
   editAttendances() {
     if (this.attendancesForm.valid) {
-      this.notificationToast.show({
-        status: 'loading'
-      });
+      this.isEditingAttendance = true;
       this.updateMultipleAttendancesRequest = this.attendancesForm.value as UpdateMultipleAttendancesRequestInterface;
       this.isAttendancesInvalid = false;
       this.attendancesService.updateMultipleAttendances(this.updateMultipleAttendancesRequest).subscribe({
         next: (response) => {
+          this.isEditingAttendance = false;
           this.updateMultipleAttendancesResponse = response;
           this.notificationToast.show({
             status: 'success',
@@ -178,6 +176,7 @@ export class EditAttendance {
           this.commissionForm.controls.attendance_date.disable();
         },
         error: (error) => {
+          this.isEditingAttendance = false;
           this.updateMultipleAttendancesResponse = error;
           this.notificationToast.show({
             status: 'error',
@@ -197,30 +196,30 @@ export class EditAttendance {
   }
 
   getCareersWithSubjects() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.careersService.getCareersWithSubjects().subscribe({
       next: (response => {
         this.careers = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las carreras', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })
   }
 
   getCommissions() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.commissionsService.getCommissions().subscribe({
       next: (response => {
         this.commissions = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener las comisiones', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })
@@ -247,15 +246,15 @@ export class EditAttendance {
 
   attendance_states: AttendanceStateInterface[] = []
   getAttendanceStates() {
-    this.isLoading = true;
+    this.isLoadingCareers = true;
     this.attendanceStatesService.getAttendanceStates().subscribe({
       next: (response => {
         this.attendance_states = response;
-        this.isLoading = false;
+        this.isLoadingCareers = false;
       }),
       error: (error => {
         console.error('Error al obtener los estados de asistencia', error)
-        this.isLoading = false;
+        this.isLoadingCareers = false;
         this.isError = true;
       })
     })

@@ -1,6 +1,6 @@
 <section class="bg-white border shadow-sm rounded p-4 mb-3">
     <h3 class="mb-3">Tomar asistencia</h3>
-    @if (isLoading) {
+    @if (isLoadingCareers) {
         <div class="d-flex justify-content-center">
             <div class="spinner-border" role="status"></div>
         </div>
@@ -106,7 +106,14 @@
                     }
                 </ul>
                 <div class="d-flex justify-content-end mt-4">
-                    <button (click)="registerAttendance()" class="button-accent flex-grow-1 flex-sm-grow-0">Registar asistencia</button>
+                    @if (isRegisteringAttendance) {
+                        <button class="button-accent flex-grow-1 flex-sm-grow-0" disabled>
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Registrando...
+                        </button>
+                    } @else {
+                        <button (click)="registerAttendance()" class="button-accent flex-grow-1 flex-sm-grow-0">Registar asistencia</button>
+                    }
                 </div>
             }
         </form>

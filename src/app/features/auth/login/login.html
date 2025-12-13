@@ -34,7 +34,14 @@
                 <a routerLink="/public/auth/password-recovery" class="small a-accent">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+            @if (isLoading) {
+                <button class="btn btn-primary w-100" disabled>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Iniciando sesión...
+                </button>
+            } @else {
+                <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
+            }
 
             <div class="text-center mt-3">
                 <a routerLink="/public/auth/register" class="small a-accent">¿No tienes cuenta? Regístrate</a>

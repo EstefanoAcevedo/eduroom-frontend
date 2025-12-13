@@ -21,6 +21,8 @@ export class Register {
   private rolesService = inject(RolesService);
   private authService = inject(AuthService);
 
+  isLoading: boolean = false;
+
   ngOnInit() {
     this.getProvinces();
     this.getRoles();
@@ -101,9 +103,7 @@ export class Register {
   @ViewChild(NotificationToast) notificationToast!: NotificationToast;
   registerUser() {
     if (this.registerForm.valid) {
-      this.notificationToast.show({
-        status: 'loading'
-      });
+      this.isLoading = true;
       const provinceName = this.provinces.find(province => province.id === this.province.value).nombre;
       const locationName = this.locations.find(location => location.id === this.location.value).nombre;
       const registerRequest: RegisterRequestInterface = {
@@ -119,6 +119,7 @@ export class Register {
       }
       this.authService.register(registerRequest).subscribe({
         next: (response) => {
+          this.isLoading = false;
           this.notificationToast.show({
             title: 'Éxito',
             message: `${response.message}, ya puede iniciar sesión con sus credenciales`,
@@ -126,6 +127,7 @@ export class Register {
           });
         },
         error: (error) => {
+          this.isLoading = false;
           this.notificationToast.show({
             title: 'Error al registrar usuario',
             message: error.error.message,

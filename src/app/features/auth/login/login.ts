@@ -17,6 +17,8 @@ export class Login {
   private router = inject(Router);
   private authService = inject(AuthService);
 
+  isLoading: boolean = false;
+
   loginForm: FormGroup;
   submitted = false;
 
@@ -49,9 +51,7 @@ export class Login {
     this.submitted = true;
     this.loginForm.markAllAsTouched();
     if (this.loginForm.valid) {
-      this.notificationToast.show({
-        status: 'loading'
-      })
+      this.isLoading = true;
 
 
       const user_email = String(this.loginForm.value.user_email || '').trim();
@@ -78,7 +78,7 @@ export class Login {
           // Elegir destino según rol (case-insensitive)
           const has = (role: string) => roles.some(r => r.toLowerCase() === role.toLowerCase());
 
-          this.notificationToast.hide();
+          this.isLoading = false;
 
           if (has('admin')) {
             this.router.navigate(['/private/admin/dashboard'], { replaceUrl: true });
@@ -91,6 +91,7 @@ export class Login {
           }
         },
         error: (error) => {
+          this.isLoading = false;
           console.error('Error durante el inicio de sesión:', error);
           this.notificationToast.show({
             status: 'error',

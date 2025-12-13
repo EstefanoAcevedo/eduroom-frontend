@@ -17,6 +17,8 @@ export class Sidebar {
   private router = inject(Router);
   @ViewChild(NotificationToast) notificationToast!: NotificationToast;
 
+  isLoading: boolean = false;
+
   userName: string = '';
   userRol: string = '';
   
@@ -48,15 +50,13 @@ export class Sidebar {
   }
 
   logout() {
-    this.notificationToast.show({
-        status: 'loading'
-    });
+    this.isLoading = true;
     this.authService.logout({}).subscribe({
       next: (response) => {
         sessionStorage.removeItem('authToken');
         sessionStorage.removeItem('user_name');
         sessionStorage.removeItem('roles');
-        this.notificationToast.hide();
+        this.isLoading = false;
         this.router.navigate(['login']);
       },
       error: (error) => {
